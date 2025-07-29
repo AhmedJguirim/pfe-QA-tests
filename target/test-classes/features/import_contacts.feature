@@ -11,7 +11,18 @@ Feature: Contacts Management
     Then the user should be redirected to the admin page
 
   Scenario: Successfully import new contacts from a CSV file
-    Given the user navigates to the contacts page
+    Given the user is on the contacts page
     When the user notes the current number of contacts
     And the user imports new contacts from the file "C:\Users\AORUS\Documents\trash\tast\new_contacts_with_custom_fields.csv"
     Then the total number of contacts should be increased by 5
+
+  Scenario: Delete imported contacts
+    Given the user is on the contacts page
+    When the user deletes the following contacts:
+      | email                      |
+      | natalie.cruz@example.com   |
+      | omar.benali@example.com    |
+      | priya.mehta@example.com    |
+      | quentin.dupre@example.com  |
+      | rania.zaki@example.com     |
+    Then the total number of contacts should return to the initial count
