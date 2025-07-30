@@ -7,6 +7,7 @@ Feature: Custom Object Management
     And clicks on the login button
     Then the user should be redirected to the admin page
 
+  @CreateCustomObject
   Scenario: Successfully create a new custom object with custom fields
     Given the user navigates to the custom objects page
     When the user creates a new custom object named "Booking test"

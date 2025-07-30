@@ -10,12 +10,14 @@ Feature: Contacts Management
     And clicks on the login button
     Then the user should be redirected to the admin page
 
+  @ImportContacts
   Scenario: Successfully import new contacts from a CSV file
     Given the user is on the contacts page
     When the user notes the current number of contacts
     And the user imports new contacts from the file "C:\Users\AORUS\Documents\trash\tast\new_contacts_with_custom_fields.csv"
     Then the total number of contacts should be increased by 5
-
+  
+  @DeleteContacts
   Scenario: Delete imported contacts
     Given the user is on the contacts page
     When the user deletes the following contacts:
