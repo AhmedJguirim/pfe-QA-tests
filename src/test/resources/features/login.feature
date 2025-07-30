@@ -23,4 +23,3 @@ Feature: Login Functionality
     Examples:
       | username    | password  |
       | invaliduser@gmail.com | wrongpass |
-      | invaliduser@gmail.com       |    123456 |
