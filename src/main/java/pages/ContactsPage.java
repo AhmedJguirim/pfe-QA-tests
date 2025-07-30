@@ -166,4 +166,9 @@ public class ContactsPage {
         Thread.sleep(1000);
         tagInputField.sendKeys(Keys.ENTER);
     }
+
+    public boolean isTagVisible(String tagName) {
+        By tag = By.xpath("//span[contains(@class, 'fi-badge')]//span[@class='truncate' and normalize-space()='" + tagName + "']");
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(tag)).isDisplayed();
+    }
 }

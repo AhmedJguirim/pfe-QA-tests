@@ -9,6 +9,7 @@
 
 ## complex scenarios
 - VerifySegmentAutomation: tests one key feature of the application (it rolls back the changes later)
+- Journeys: testing the execution of multiple journeys all at once
 
 ## independant scenarios
 - login success
