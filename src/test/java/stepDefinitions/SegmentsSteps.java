@@ -60,7 +60,7 @@ public class SegmentsSteps extends TestBase {
     }
 
     @When("the user adds a new rule named {string} with the following condition:")
-    public void the_user_adds_a_new_rule_named_with_the_following_condition(String ruleName, DataTable dataTable) {
+    public void the_user_adds_a_new_rule_named_with_the_following_condition(String ruleName, DataTable dataTable) throws InterruptedException  {
         try {
             Map<String, String> condition = dataTable.asMaps().get(0);
             String conditionType = condition.get("condition type");
