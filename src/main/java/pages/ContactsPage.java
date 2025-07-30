@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -42,6 +43,8 @@ public class ContactsPage {
         return By.xpath("//div[contains(@class, 'choices__item') and text()='" + tagName + "']/button");
     }
     private final By saveChangesButton = By.xpath("//button[.//span[normalize-space()='Save changes']]");
+
+    private final By tagInput = By.cssSelector("input.choices__input--cloned");
 
 
     public ContactsPage(WebDriver driver) {
@@ -153,5 +156,14 @@ public class ContactsPage {
     public void clickSaveChangesButton() {
         scrollDown();
         wait.until(ExpectedConditions.elementToBeClickable(saveChangesButton)).click();
+    }
+
+    public void addTag(String tagName) throws InterruptedException {
+        WebElement tagInputField = wait.until(ExpectedConditions.elementToBeClickable(tagInput));
+        tagInputField.click();
+        Thread.sleep(1000);
+        tagInputField.sendKeys(tagName);
+        Thread.sleep(1000);
+        tagInputField.sendKeys(Keys.ENTER);
     }
 }

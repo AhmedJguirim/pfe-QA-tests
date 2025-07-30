@@ -24,3 +24,5 @@ Feature: Automatic Segmentation
     When the user removes the "New Lead" tag from the contact "qatester@gmail.com"
     And the user navigates back to the "Winter tourist 2025" segment page
     Then the user should see that the segment is empty again
+    And the user deletes the custom item for "qatester@gmail.com"
+    And the user adds the "New Lead" tag back to the contact "qatester@gmail.com"

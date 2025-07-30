@@ -33,6 +33,11 @@ public class CustomItemPage {
     private final By editLink = By.xpath("//a[.//span[normalize-space()='Edit']]");
     private final By saveChangesButton = By.xpath("//button[.//span[normalize-space()='Save changes']]");
 
+     // ADD
+    private final By deleteButton = By.cssSelector("button[wire\\:click^=\"mountTableAction('delete'\"]");
+    // ADD
+    private final By confirmDeleteButton = By.xpath("//button[.//span[normalize-space()='Confirm']]");
+
     public CustomItemPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -108,5 +113,15 @@ public class CustomItemPage {
     
     public void clickSaveChangesButton() {
         wait.until(ExpectedConditions.elementToBeClickable(saveChangesButton)).click();
+    }
+
+    // ADD
+    public void clickDeleteButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(deleteButton)).click();
+    }
+
+    // ADD
+    public void clickConfirmDeleteButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(confirmDeleteButton)).click();
     }
 }

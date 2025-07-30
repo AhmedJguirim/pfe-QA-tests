@@ -155,4 +155,39 @@ public class SegmentAutomationSteps extends TestBase {
             throw e;
         }
     }
+
+    @When("the user deletes the custom item for {string}")
+    public void the_user_deletes_the_custom_item_for(String email) throws InterruptedException {
+        try {
+            customItemPage.navigateToCustomItems();
+            customItemPage.clickFilterButton();
+            customItemPage.filterByCustomObject("Booking test");
+            customItemPage.closeFilterMenu();
+            Thread.sleep(1000);
+            customItemPage.clickDeleteButton();
+            customItemPage.clickConfirmDeleteButton();
+            Thread.sleep(1000);
+            Hooks._Scenario.log(Status.PASS, "Successfully deleted the custom item for: " + email);
+        } catch (Exception e) {
+            Hooks._Scenario.log(Status.FAIL, "Failed to delete the custom item: " + e.getMessage());
+            throw e;
+        }
+    }
+
+    // ADD
+    @When("the user adds the {string} tag back to the contact {string}")
+    public void the_user_adds_the_tag_back_to_the_contact(String tagName, String email) throws InterruptedException {
+        try {
+            contactsPage.navigateToContacts();
+            contactsPage.searchForContact(email);
+            Thread.sleep(1000);
+            contactsPage.clickEditContactButton();
+            contactsPage.addTag(tagName);
+            contactsPage.clickSaveChangesButton();
+            Hooks._Scenario.log(Status.PASS, "Successfully added the tag '" + tagName + "' back to the contact.");
+        } catch (Exception e) {
+            Hooks._Scenario.log(Status.FAIL, "Failed to add the tag back to the contact: " + e.getMessage());
+            throw e;
+        }
+    }
 }
