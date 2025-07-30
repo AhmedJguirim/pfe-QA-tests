@@ -103,4 +103,22 @@ public class CustomItemSteps extends TestBase {
             throw e;
         }
     }
+
+    @When("the user deletes the created custom item")
+    public void the_user_deletes_the_created_custom_item() throws InterruptedException {
+        try {
+            customItemPage.navigateToCustomItems();
+            customItemPage.clickFilterButton();
+            customItemPage.filterByCustomObject("Booking test");
+            customItemPage.closeFilterMenu();
+            Thread.sleep(1000);
+            customItemPage.clickDeleteButton();
+            customItemPage.clickConfirmDeleteButton();
+            Thread.sleep(1000);
+            Hooks._Scenario.log(Status.PASS, "Successfully deleted the custom item.");
+        } catch (Exception e) {
+            Hooks._Scenario.log(Status.FAIL, "Failed to delete the custom item: " + e.getMessage());
+            throw e;
+        }
+    }
 }

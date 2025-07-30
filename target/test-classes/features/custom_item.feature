@@ -18,3 +18,4 @@ Feature: Custom Item Management
     And the user selects "single" as the room type
     And the user clicks the create button
     Then the user should be on the "View custom item" page
+    And the user deletes the created custom item
