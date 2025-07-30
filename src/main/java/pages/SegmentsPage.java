@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,6 +17,7 @@ public class SegmentsPage {
 
     private WebDriver driver;
     private WebDriverWait wait;
+    private JavascriptExecutor js;
 
     private final By segmentsSidebarLink = By.xpath("//span[normalize-space()='Segments']");
     private final By newSegmentButton = By.cssSelector("button[wire\\:click=\"mountAction('create')\"]");
@@ -54,9 +56,15 @@ public class SegmentsPage {
     private final By dateValueInput = By.cssSelector("input[type='date']");
 
 
+    private final By viewLink = By.xpath("//a[.//span[normalize-space()='View']]");
+    private final By emptySegmentMessage = By.xpath("//h4[normalize-space()='No contacts']");
+    private final By paginationOverview = By.cssSelector("span.fi-pagination-overview");
+
+
     public SegmentsPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        this.js = (JavascriptExecutor) driver;
     }
 
 
@@ -187,4 +195,25 @@ public class SegmentsPage {
         List<WebElement> cards = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(conditionCards));
         return cards.size();
     }
+
+    
+    public void clickViewLink() {
+        wait.until(ExpectedConditions.elementToBeClickable(viewLink)).click();
+    }
+
+    public void scrollDown() {
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+    }
+    
+    public boolean isSegmentEmptyMessageVisible() {
+        scrollDown();
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(emptySegmentMessage)).isDisplayed();
+    }
+
+    
+    public String getPaginationOverviewText() {
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(paginationOverview)).getText();
+    }
+
+
 }

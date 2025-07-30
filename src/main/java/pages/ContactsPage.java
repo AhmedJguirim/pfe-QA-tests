@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,6 +14,7 @@ public class ContactsPage {
 
     private WebDriver driver;
     private WebDriverWait wait;
+    private JavascriptExecutor js;
 
     private final By contactsSidebarLink = By.xpath("//span[normalize-space()='Contacts']");
     private final By paginationOverview = By.cssSelector("span.fi-pagination-overview");
@@ -29,10 +31,23 @@ public class ContactsPage {
     // This finds the confirmation button in the modal, assuming its text is 'Confirm'
     private final By confirmDeleteButton = By.xpath("//button/span[normalize-space()='Confirm']");
 
+    private final By newContactButton = By.cssSelector("a[href='http://127.0.0.1:8000/admin/contacts/create']");
+    private final By firstNameInput = By.id("data.first_name");
+    private final By lastNameInput = By.id("data.last_name");
+    private final By emailInput = By.id("data.email");
+    private final By createButton = By.xpath("//button[@type='submit' and .//span[normalize-space()='Create']]");
+
+    private final By editContactButton = By.xpath("//a[contains(@href, '/edit')]");
+    private final By removeTagButton(String tagName) {
+        return By.xpath("//div[contains(@class, 'choices__item') and text()='" + tagName + "']/button");
+    }
+    private final By saveChangesButton = By.xpath("//button[.//span[normalize-space()='Save changes']]");
+
 
     public ContactsPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        this.js = (JavascriptExecutor) driver;
     }
     
     public void navigateToContacts() {
@@ -96,5 +111,47 @@ public class ContactsPage {
      */
     public void clickConfirmDeleteButton() {
         wait.until(ExpectedConditions.elementToBeClickable(confirmDeleteButton)).click();
+    }
+
+    public void clickNewContactButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(newContactButton)).click();
+    }
+
+    public void enterFirstName(String firstName) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(firstNameInput)).sendKeys(firstName);
+    }
+
+    public void enterLastName(String lastName) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(lastNameInput)).sendKeys(lastName);
+    }
+
+    public void enterEmail(String email) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(emailInput)).sendKeys(email);
+    }
+
+    public void clickCreateButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(createButton)).click();
+    }
+
+    // public boolean isOnPage(String pageTitle) {
+    //     By pageHeader = By.xpath("//h1[normalize-space()='" + pageTitle + "']");
+    //     return wait.until(ExpectedConditions.visibilityOfElementLocated(pageHeader)).isDisplayed();
+    // }
+
+    public void scrollDown() {
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+    }
+
+    public void clickEditContactButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(editContactButton)).click();
+    }
+
+    public void removeTag(String tagName) {
+        wait.until(ExpectedConditions.elementToBeClickable(removeTagButton(tagName))).click();
+    }
+
+    public void clickSaveChangesButton() {
+        scrollDown();
+        wait.until(ExpectedConditions.elementToBeClickable(saveChangesButton)).click();
     }
 }
