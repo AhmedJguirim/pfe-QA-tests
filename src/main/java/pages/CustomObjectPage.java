@@ -123,7 +123,6 @@ public class CustomObjectPage {
     }
     
     public int getCustomFieldCount() {
-        // UPDATED: More robust way to get the total count
         WebElement paginationElement = wait.until(ExpectedConditions.visibilityOfElementLocated(paginationOverview));
         String text = paginationElement.getText();
         Pattern pattern = Pattern.compile("(\\d+)(?!.*\\d)");

@@ -36,7 +36,6 @@ public class LoginStep extends TestBase {
             Hooks._Scenario.log(Status.FAIL, "Failed to open login page");
             Hooks._Scenario.log(Status.FAIL, "" + e.getMessage());
             throw e;
-            // TODO: handle exception
         }
     }
 
@@ -49,7 +48,6 @@ public class LoginStep extends TestBase {
             Hooks._Scenario.log(Status.FAIL, "Failed to enter username");
             Hooks._Scenario.log(Status.FAIL, "" + e.getMessage());
             throw e;
-            // TODO: handle exception
         }
     }
 
@@ -62,7 +60,6 @@ public class LoginStep extends TestBase {
             Hooks._Scenario.log(Status.FAIL, "The user enters a password");
             Hooks._Scenario.log(Status.FAIL, "" + e.getMessage());
             throw e;
-            // TODO: handle exception
         }
     }
 
@@ -76,16 +73,13 @@ public class LoginStep extends TestBase {
             Hooks._Scenario.log(Status.FAIL, "Failed to click on the login button");
             Hooks._Scenario.log(Status.FAIL, "" + e.getMessage());
             throw e;
-            // TODO: handle exception
         }
     }
 
     @Then("the user should be redirected to the admin page")
     public void userShouldBeRedirectedToAdminPage() {
         try {
-            // UPDATED: Use the new method to check for URL redirection
             boolean isSuccess = loginPage.checkSuccessUrl();
-            // UPDATED: Use JUnit 5 assertion
             assertTrue(isSuccess, "User was not redirected to the admin page.");
             Hooks._Scenario.log(Status.PASS, "User successfully redirected to the admin page.");
         } catch (Exception e) {
@@ -98,9 +92,7 @@ public class LoginStep extends TestBase {
     public void userShouldSeeErrorMessage() {
         try {
             String errorMessage = loginPage.getErrorMessage();
-            // UPDATED: Check for the correct error message text
             String expectedMessage = "These credentials do not match our records.";
-            // UPDATED: Use JUnit 5 assertion and provide a clear failure message
             assertTrue(errorMessage.contains(expectedMessage), "Error message was not correct. Found: " + errorMessage);
             Hooks._Scenario.log(Status.PASS, "The user correctly saw the error message: '" + errorMessage + "'");
         } catch (Exception e) {

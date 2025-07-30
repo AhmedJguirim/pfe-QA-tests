@@ -14,7 +14,6 @@ public class ContactsPage {
     private WebDriver driver;
     private WebDriverWait wait;
 
-    // --- Existing Locators ---
     private final By contactsSidebarLink = By.xpath("//span[normalize-space()='Contacts']");
     private final By paginationOverview = By.cssSelector("span.fi-pagination-overview");
     private final By importContactsButton = By.cssSelector("button[wire\\:click=\"mountAction('importContacts')\"]");
@@ -23,7 +22,6 @@ public class ContactsPage {
     private final By verifyImportButton = By.cssSelector("button[wire\\:click=\"mountAction('verify')\"]");
     private final By finalImportButton = By.cssSelector("button[wire\\:click=\"mountAction('import')\"]");
 
-    // === NEW LOCATORS for Delete Workflow ===
     private final By searchInput = By.cssSelector("input[wire\\:model\\.live\\.debounce\\.500ms='tableSearch']");
 
     // This smart XPath finds the delete button even with a dynamic ID
@@ -36,8 +34,6 @@ public class ContactsPage {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
-
-    // --- Existing Methods ---
     
     public void navigateToContacts() {
         wait.until(ExpectedConditions.elementToBeClickable(contactsSidebarLink)).click();
@@ -75,7 +71,6 @@ public class ContactsPage {
         wait.until(ExpectedConditions.elementToBeClickable(finalImportButton)).click();
     }
     
-    // === NEW METHODS for Delete Workflow ===
 
     /**
      * Searches for a contact by typing their email into the search bar.

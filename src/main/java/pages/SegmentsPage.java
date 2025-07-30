@@ -17,7 +17,6 @@ public class SegmentsPage {
     private WebDriver driver;
     private WebDriverWait wait;
 
-    // --- Locators for Segment Creation ---
     private final By segmentsSidebarLink = By.xpath("//span[normalize-space()='Segments']");
     private final By newSegmentButton = By.cssSelector("button[wire\\:click=\"mountAction('create')\"]");
     private final By segmentNameInput = By.cssSelector("input[wire\\:model='mountedActionsData.0.name']");
@@ -26,20 +25,19 @@ public class SegmentsPage {
         return By.xpath("//h1[normalize-space()=\"Edit '" + segmentName + "' Segment\"]");
     }
 
-    // --- Locators for Rule Creation ---
     private final By createRuleButton = By.cssSelector("button[wire\\:click=\"mountAction('createRule')\"]");
- private final By ruleNameInput = By.cssSelector("input[wire\\:model\\.live='mountedActionsData.0.name']");
+    private final By ruleNameInput = By.cssSelector("input[wire\\:model\\.live='mountedActionsData.0.name']");
     private final By addConditionButton = By.cssSelector("button[wire\\:click='addCondition']");
     private final By conditionTypeSelect = By.id("mountedActionsData.0.condition_type");
     private final By conditionAttributeSelect = By.id("mountedActionsData.0.field");
-private final By conditionOperatorSelect = By.cssSelector("select[wire\\:model\\.live='mountedActionsData.0.operator']");
+    private final By conditionOperatorSelect = By.cssSelector("select[wire\\:model\\.live='mountedActionsData.0.operator']");
     private final By conditionValueSelect = By.cssSelector("select[wire\\:model\\.live='mountedActionsData.0.value1']");
     private final By submitRuleButton = By.xpath("//button[@type='submit' and .//span[normalize-space()='Submit']]");
- private final By createdRuleConditionText = By.xpath(
+    private final By createdRuleConditionText = By.xpath(
         "//div[contains(@class, 'font-medium') and normalize-space()=\"If the contact 'birthday' month is '02'\"]"
     );
 
-     private final By publishSegmentButton = By.cssSelector("button[wire\\:click=\"mountAction('publish')\"]");
+    private final By publishSegmentButton = By.cssSelector("button[wire\\:click=\"mountAction('publish')\"]");
 
     private final By searchInput = By.cssSelector("input[wire\\:model\\.live\\.debounce\\.500ms='tableSearch']");
     private final By rulesLink = By.xpath("//a[.//span[normalize-space()='Rules']]");
@@ -61,7 +59,6 @@ private final By conditionOperatorSelect = By.cssSelector("select[wire\\:model\\
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
-    // --- Methods for Segment Creation ---
 
     public void navigateToSegments() {
         wait.until(ExpectedConditions.elementToBeClickable(segmentsSidebarLink)).click();
@@ -84,7 +81,6 @@ private final By conditionOperatorSelect = By.cssSelector("select[wire\\:model\\
         return wait.until(ExpectedConditions.visibilityOfElementLocated(editPageHeader(segmentName))).isDisplayed();
     }
 
-    // --- Methods for Rule Creation ---
 
     public void clickCreateRuleButton() throws InterruptedException {
         Thread.sleep(700);
@@ -129,18 +125,15 @@ private final By conditionOperatorSelect = By.cssSelector("select[wire\\:model\\
         return wait.until(ExpectedConditions.visibilityOfElementLocated(createdRuleConditionText)).isDisplayed();
     }
 
-     // NEW: Method to click the publish button
     public void clickPublishSegmentButton() {
         wait.until(ExpectedConditions.elementToBeClickable(publishSegmentButton)).click();
     }
 
-    // NEW: Method to verify the final page header
     public boolean isOnViewSegmentPage(String pageTitle) {
         By viewPageHeader = By.xpath("//h1[normalize-space()='" + pageTitle + "']");
         return wait.until(ExpectedConditions.visibilityOfElementLocated(viewPageHeader)).isDisplayed();
     }
-
-     // --- NEW METHODS ---
+    
     public void searchSegment(String segmentName) throws InterruptedException {
         WebElement searchField = wait.until(ExpectedConditions.elementToBeClickable(searchInput));
         searchField.clear();
@@ -189,11 +182,6 @@ private final By conditionOperatorSelect = By.cssSelector("select[wire\\:model\\
     public void clickSaveChangesButton() {
         wait.until(ExpectedConditions.elementToBeClickable(saveChangesButton)).click();
     }
-
-    // public List<String> getConditionCardTexts() {
-    //     List<WebElement> cards = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(conditionCards));
-    //     return cards.stream().map(WebElement::getText).collect(Collectors.toList());
-    // }
 
         public int getConditionCardCount() {
         List<WebElement> cards = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(conditionCards));

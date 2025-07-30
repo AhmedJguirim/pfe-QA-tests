@@ -15,7 +15,6 @@ import pages.ContactsPage;
 public class ContactsSteps extends TestBase {
 
     private ContactsPage contactsPage;
-    // UPDATED: Made static to persist the value across scenarios in a single feature run.
     private static int initialContactCount; 
 
     public ContactsSteps() {
@@ -72,7 +71,6 @@ public class ContactsSteps extends TestBase {
     }
 
     @Then("the total number of contacts should be increased by {int}")
-    // UPDATED: Added 'throws InterruptedException' to handle Thread.sleep()
     public void the_total_number_of_contacts_should_be_increased_by(Integer increaseAmount) throws InterruptedException {
         try {
             Hooks._Scenario.log(Status.INFO, "Waiting for the contacts list to refresh...");
