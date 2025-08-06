@@ -10,14 +10,13 @@ Feature: Journeys Automation
   @Journeys
   Scenario: Verify that journeys are working correctly
     Given the user navigates to the journeys page
-    When the user activates the "QA first journey" journey
-    And the user activates the "qa second journey" journey
-    And the user activates the "QA third journey" journey
+    When the user activates the "QA1" journey
+    And the user activates the "QA2" journey
+    And the user activates the "QA3" journey
     And the user creates a new contact with the following details:
       | firstName | lastName | email                  |
       | Test      | User     | journey.test@gmail.com |
-    Then the user should see the tags "Budget", "qa test subject", and "VIP" for the contact "journey.test@gmail.com"
-    When the user deletes the contact "journey.test@gmail.com"
-    And the user deactivates the "QA first journey" journey
-    And the user deactivates the "qa second journey" journey
-    And the user deactivates the "QA third journey" journey
+    Then the user should see the tags "qatag1", "qatag2", and "qatag3" for the contact "journey.test@gmail.com"
+    When the user deactivates the "QA1" journey
+    And the user deactivates the "QA2" journey
+    And the user deactivates the "QA3" journey

@@ -1,4 +1,4 @@
-Feature: Custom Object Management
+Feature: Create Custom Object
 
   Background: User is logged in
     Given the user is on the login page

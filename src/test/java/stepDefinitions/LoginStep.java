@@ -64,7 +64,7 @@ public class LoginStep extends TestBase {
     }
 
     @And("clicks on the login button")
-    public void userClicksLoginButton() {
+    public void userClicksLoginButton(){
 
         try {
             loginPage.submitLogin();

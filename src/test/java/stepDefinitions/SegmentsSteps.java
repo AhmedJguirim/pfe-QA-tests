@@ -60,46 +60,46 @@ public class SegmentsSteps extends TestBase {
     }
 
     @When("the user adds a new rule named {string} with the following condition:")
-    public void the_user_adds_a_new_rule_named_with_the_following_condition(String ruleName, DataTable dataTable) throws InterruptedException  {
-        try {
-            Map<String, String> condition = dataTable.asMaps().get(0);
-            String conditionType = condition.get("condition type");
-            String attribute = condition.get("attribute");
-            String operator = condition.get("operator");
-            String value = condition.get("value");
+public void the_user_adds_a_new_rule_named_with_the_following_condition(String ruleName, DataTable dataTable) throws InterruptedException  {
+    try {
+        Map<String, String> condition = dataTable.asMaps().get(0);
+        String conditionType = condition.get("condition type");
+        String attribute = condition.get("attribute");
+        String operator = condition.get("operator");
+        String value = condition.get("value");
 
-            segmentsPage.clickCreateRuleButton();
-            Hooks._Scenario.log(Status.PASS, "Clicked the 'Create a Rule' button.");
-            
-            segmentsPage.enterRuleName(ruleName);
-            Hooks._Scenario.log(Status.PASS, "Entered rule name: " + ruleName);
+        segmentsPage.clickCreateRuleButton();
+        Hooks._Scenario.log(Status.PASS, "Clicked the 'Create a Rule' button.");
+        
+        segmentsPage.enterRuleName(ruleName);
+        Hooks._Scenario.log(Status.PASS, "Entered rule name: " + ruleName);
 
-            segmentsPage.clickSubmitRuleButton();
-            Hooks._Scenario.log(Status.PASS, "Clicked the 'Submit' button.");
-            
-            segmentsPage.clickAddConditionButton();
-            Hooks._Scenario.log(Status.PASS, "Clicked the 'Add Condition' button.");
-            
-            segmentsPage.selectConditionType(conditionType);
-            Hooks._Scenario.log(Status.PASS, "Selected condition type: " + conditionType);
-            
-            segmentsPage.selectConditionAttribute(attribute);
-            Hooks._Scenario.log(Status.PASS, "Selected attribute: " + attribute);
-            
-            segmentsPage.selectConditionOperator(operator);
-            Hooks._Scenario.log(Status.PASS, "Selected operator: " + operator);
-            
-            segmentsPage.selectConditionValue(value);
-            Hooks._Scenario.log(Status.PASS, "Selected value: " + value);
-            
-            segmentsPage.clickSubmitRuleButton();
-            Hooks._Scenario.log(Status.PASS, "Clicked the 'Submit' button.");
+        segmentsPage.clickSubmitRuleButton();
+        Hooks._Scenario.log(Status.PASS, "Clicked the 'Submit' button.");
+        
+        segmentsPage.clickAddConditionButton();
+        Hooks._Scenario.log(Status.PASS, "Clicked the 'Add Condition' button.");
+        
+        segmentsPage.selectConditionType(conditionType);
+        Hooks._Scenario.log(Status.PASS, "Selected condition type: " + conditionType);
+        
+        segmentsPage.selectConditionAttribute(attribute);
+        Hooks._Scenario.log(Status.PASS, "Selected attribute: " + attribute);
+        
+        segmentsPage.selectConditionOperator(operator);
+        Hooks._Scenario.log(Status.PASS, "Selected operator: " + operator);
+        
+        segmentsPage.selectConditionValue(value);
+        Hooks._Scenario.log(Status.PASS, "Selected value: " + value);
+        
+        segmentsPage.clickSubmitRuleButton();
+        Hooks._Scenario.log(Status.PASS, "Clicked the 'Submit' button.");
 
-        } catch (Exception e) {
-            Hooks._Scenario.log(Status.FAIL, "Failed to add the new rule: " + e.getMessage());
-            throw e;
-        }
+    } catch (Exception e) {
+        Hooks._Scenario.log(Status.FAIL, "Failed to add the new rule: " + e.getMessage());
+        throw e;
     }
+}
 
     @Then("the user should see the new rule condition on the page")
     public void the_user_should_see_the_new_rule_condition_on_the_page() {

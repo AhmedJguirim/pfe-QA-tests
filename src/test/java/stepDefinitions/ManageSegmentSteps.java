@@ -73,48 +73,64 @@ public class ManageSegmentSteps extends TestBase {
     }
 
     @When("the user adds a new rule named {string} with the following conditions:")
-    public void the_user_adds_a_new_rule_named_with_the_following_conditions(String ruleName, DataTable dataTable) throws InterruptedException  {
-        try {
-            segmentsPage.clickCreateRuleButton();
-            Hooks._Scenario.log(Status.PASS, "Clicked the 'Create a Rule' button.");
-            
-            segmentsPage.enterRuleName(ruleName);
-            Hooks._Scenario.log(Status.PASS, "Entered rule name: " + ruleName);
+public void the_user_adds_a_new_rule_named_with_the_following_conditions(String ruleName, DataTable dataTable) throws InterruptedException  {
+    try {
+        segmentsPage.clickCreateRuleButton();
+        Hooks._Scenario.log(Status.PASS, "Clicked the 'Create a Rule' button.");
+        
+        Thread.sleep(1000);
+        segmentsPage.enterRuleName(ruleName);
+        Hooks._Scenario.log(Status.PASS, "Entered rule name: " + ruleName);
 
+        Thread.sleep(1000);
+        segmentsPage.clickSubmitRuleButton();
+        Hooks._Scenario.log(Status.PASS, "Clicked the 'Submit' button.");
+        
+        List<Map<String, String>> conditions = dataTable.asMaps(String.class, String.class);
+        for (Map<String, String> condition : conditions) {
+            segmentsPage.clickAddConditionButton();
+            Hooks._Scenario.log(Status.PASS, "Clicked the 'Add Condition' button.");
+            
+            String conditionType = condition.get("condition type");
+            segmentsPage.selectConditionType(conditionType);
+            Thread.sleep(1000);
+            
+            Hooks._Scenario.log(Status.PASS, "Selected condition type: " + conditionType);
+            if(conditionType.equals("Base Attribute")) {
+                segmentsPage.selectConditionAttribute(condition.get("attribute"));
+                Hooks._Scenario.log(Status.PASS, "Selected attribute: " + condition.get("attribute"));
+                segmentsPage.selectConditionOperator(condition.get("operator"));
+                Hooks._Scenario.log(Status.PASS, "Selected operator: " + condition.get("operator"));
+                segmentsPage.selectConditionValue(condition.get("value"));
+            }else if(conditionType.equals("Contact Custom Field")) {
+                segmentsPage.selectConditionAttribute(condition.get("attribute"));
+                Hooks._Scenario.log(Status.PASS, "Selected attribute: " + condition.get("attribute"));
+                segmentsPage.selectConditionOperator(condition.get("operator"));
+                Hooks._Scenario.log(Status.PASS, "Selected operator: " + condition.get("operator"));
+                segmentsPage.enterNumberValue(condition.get("value"));
+                Hooks._Scenario.log(Status.PASS, "Entered value: " + condition.get("value"));
+            }else if (conditionType.equals("Custom Item")) {
+                segmentsPage.selectConditionAttribute(condition.get("attribute"));
+                Hooks._Scenario.log(Status.PASS, "Selected attribute: " + condition.get("attribute"));
+                segmentsPage.selectConditionOperator(condition.get("operator"));
+                Hooks._Scenario.log(Status.PASS, "Selected operator: " + condition.get("operator"));
+                segmentsPage.enterDateValue(condition.get("value"));
+                Hooks._Scenario.log(Status.PASS, "Entered value: " + condition.get("value"));
+            } else if (conditionType.equals("Tags")) {
+                segmentsPage.selectTagOperator(condition.get("operator"));
+                Hooks._Scenario.log(Status.PASS, "Selected operator: " + condition.get("operator"));
+                segmentsPage.enterTagValue(condition.get("value"));
+                Hooks._Scenario.log(Status.PASS, "Entered value: " + condition.get("value"));
+            }
+            Thread.sleep(1000);
             segmentsPage.clickSubmitRuleButton();
             Hooks._Scenario.log(Status.PASS, "Clicked the 'Submit' button.");
-            
-            List<Map<String, String>> conditions = dataTable.asMaps(String.class, String.class);
-            for (Map<String, String> condition : conditions) {
-                segmentsPage.clickAddConditionButton();
-                Hooks._Scenario.log(Status.PASS, "Clicked the 'Add Condition' button.");
-                
-                String conditionType = condition.get("condition type");
-                segmentsPage.selectConditionType(conditionType);
-                Hooks._Scenario.log(Status.PASS, "Selected condition type: " + conditionType);
-                
-                if (conditionType.equals("Custom Item")) {
-                    segmentsPage.selectConditionAttribute(condition.get("attribute"));
-                    Hooks._Scenario.log(Status.PASS, "Selected attribute: " + condition.get("attribute"));
-                    segmentsPage.selectConditionOperator(condition.get("operator"));
-                    Hooks._Scenario.log(Status.PASS, "Selected operator: " + condition.get("operator"));
-                    segmentsPage.enterDateValue(condition.get("value"));
-                    Hooks._Scenario.log(Status.PASS, "Entered value: " + condition.get("value"));
-                } else if (conditionType.equals("Tags")) {
-                    segmentsPage.selectTagOperator(condition.get("operator"));
-                    Hooks._Scenario.log(Status.PASS, "Selected operator: " + condition.get("operator"));
-                    segmentsPage.enterTagValue(condition.get("value"));
-                    Hooks._Scenario.log(Status.PASS, "Entered value: " + condition.get("value"));
-                }
-                
-                segmentsPage.clickSubmitRuleButton();
-                Hooks._Scenario.log(Status.PASS, "Clicked the 'Submit' button.");
-            }
-        } catch (Exception e) {
-            Hooks._Scenario.log(Status.FAIL, "Failed to add the new rule with conditions: " + e.getMessage());
-            throw e;
         }
+    } catch (Exception e) {
+        Hooks._Scenario.log(Status.FAIL, "Failed to add the new rule with conditions: " + e.getMessage());
+        throw e;
     }
+}
 
     @And("the user saves the changes")
     public void the_user_saves_the_changes() {

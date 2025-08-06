@@ -109,6 +109,7 @@ public class SegmentAutomationSteps extends TestBase {
             customItemPage.updateDate(newDate);
             customItemPage.clickSaveChangesButton();
             Hooks._Scenario.log(Status.PASS, "Successfully updated the custom item.");
+            Thread.sleep(5000);
         } catch (Exception e) {
             Hooks._Scenario.log(Status.FAIL, "Failed to update the custom item: " + e.getMessage());
             throw e;
@@ -116,7 +117,7 @@ public class SegmentAutomationSteps extends TestBase {
     }
 
     @Then("the user should see {int} contact in the segment")
-    public void the_user_should_see_contact_in_the_segment(Integer count) {
+    public void the_user_should_see_contact_in_the_segment(Integer count) throws InterruptedException {
         try {
             String expectedText = "Showing " + count + " result";
             assertTrue(segmentsPage.getPaginationOverviewText().contains(expectedText), "The contact count did not match the expected value.");
@@ -146,7 +147,8 @@ public class SegmentAutomationSteps extends TestBase {
 
     
     @Then("the user should see that the segment is empty again")
-    public void the_user_should_see_that_the_segment_is_empty_again() {
+    public void the_user_should_see_that_the_segment_is_empty_again() throws InterruptedException  {
+        Thread.sleep(5000);
         try {
             assertTrue(segmentsPage.isSegmentEmptyMessageVisible(), "The segment was not empty.");
             Hooks._Scenario.log(Status.PASS, "Successfully verified that the segment is empty again.");

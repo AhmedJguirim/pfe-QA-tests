@@ -54,6 +54,7 @@ public class SegmentsPage {
     private final By conditionCards = By.cssSelector("div[wire\\:key^='condition-'] .fi-in-text-item > div.text-lg");
 
     private final By dateValueInput = By.cssSelector("input[type='date']");
+    private final By numberValueInput = By.cssSelector("input[type='number']");
 
 
     private final By viewLink = By.xpath("//a[.//span[normalize-space()='View']]");
@@ -110,20 +111,40 @@ public class SegmentsPage {
         select.selectByVisibleText(type);
     }
 
-    public void selectConditionAttribute(String attribute) {
+    public void selectConditionAttribute(String attribute) throws InterruptedException{
+        Thread.sleep(700);
         Select select = new Select(wait.until(ExpectedConditions.visibilityOfElementLocated(conditionAttributeSelect)));
-        select.selectByValue(attribute);
+        for (WebElement option : select.getOptions()) {
+            if (option.getText().equals(attribute)) {
+                option.click();
+                return;
+            }
+        }
+        throw new RuntimeException("Option not found: " + attribute);
     }
 
-    public void selectConditionOperator(String operator) {
+    public void selectConditionOperator(String operator) throws InterruptedException{
+                Thread.sleep(700);
         Select select = new Select(wait.until(ExpectedConditions.visibilityOfElementLocated(conditionOperatorSelect)));
         select.selectByValue(operator);
     }
     
-    public void selectConditionValue(String value) {
+    public void selectConditionValue(String valueLabel) throws InterruptedException{
+        Thread.sleep(700);
         Select select = new Select(wait.until(ExpectedConditions.visibilityOfElementLocated(conditionValueSelect)));
-        select.selectByVisibleText(value);
+        for (WebElement option : select.getOptions()) {
+            if (option.getText().equals(valueLabel)) {
+                option.click();
+                return;
+            }
+        }
+        throw new RuntimeException("Option not found: " + valueLabel);
     }
+    // public void selectConditionValue(String value) throws InterruptedException{
+    //             Thread.sleep(700);
+    //     Select select = new Select(wait.until(ExpectedConditions.visibilityOfElementLocated(conditionValueSelect)));
+    //     select.selectByVisibleText(value);
+    // }
 
     public void clickSubmitRuleButton() {
         wait.until(ExpectedConditions.elementToBeClickable(submitRuleButton)).click();
@@ -186,6 +207,10 @@ public class SegmentsPage {
     public void enterDateValue(String date) {
         WebElement dateInput = wait.until(ExpectedConditions.visibilityOfElementLocated(dateValueInput));
         dateInput.sendKeys(date);
+    }
+    public void enterNumberValue(String number) {
+        WebElement dateInput = wait.until(ExpectedConditions.visibilityOfElementLocated(numberValueInput));
+        dateInput.sendKeys(number);
     }
     public void clickSaveChangesButton() {
         wait.until(ExpectedConditions.elementToBeClickable(saveChangesButton)).click();

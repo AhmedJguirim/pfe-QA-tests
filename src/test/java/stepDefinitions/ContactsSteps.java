@@ -47,7 +47,7 @@ public class ContactsSteps extends TestBase {
     }
 
     @When("the user imports new contacts from the file {string}")
-    public void the_user_imports_new_contacts_from_the_file(String filePath) {
+    public void the_user_imports_new_contacts_from_the_file(String filePath) throws InterruptedException {
         try {
             contactsPage.clickImportContactsButton();
             Hooks._Scenario.log(Status.PASS, "Clicked the 'Import Contacts' button.");
@@ -95,6 +95,7 @@ public class ContactsSteps extends TestBase {
     @When("the user deletes the following contacts:")
     public void the_user_deletes_the_following_contacts(DataTable dataTable) throws InterruptedException {
         List<String> emails = dataTable.asList(String.class);
+        initialContactCount = contactsPage.getContactsTotal();
         // We skip the header row of the data table which is 'email'
         for (int i = 1; i < emails.size(); i++) {
             String email = emails.get(i);
@@ -113,8 +114,8 @@ public class ContactsSteps extends TestBase {
         }
     }
 
-    @Then("the total number of contacts should return to the initial count")
-    public void the_total_number_of_contacts_should_return_to_the_initial_count() throws InterruptedException {
+    @Then("the total number of contacts should be decreased by {int}")
+    public void the_total_number_of_contacts_should_return_to_the_initial_count(Integer decreaseAmount) throws InterruptedException {
         try {
             // Navigate back to the main contacts list to ensure the count is accurate
             contactsPage.navigateToContacts();
@@ -122,8 +123,10 @@ public class ContactsSteps extends TestBase {
             
             int finalCount = contactsPage.getContactsTotal();
             Hooks._Scenario.log(Status.INFO, "Final contact count is: " + finalCount);
-            assertEquals(initialContactCount, finalCount, "The final contact count does not match the initial count.");
-            Hooks._Scenario.log(Status.PASS, "Assertion successful. Contact count returned to " + initialContactCount);
+
+            int expectedCount = initialContactCount - decreaseAmount;
+            assertEquals(expectedCount, finalCount, "The final contact count does not match the expected count after deletion.");
+            Hooks._Scenario.log(Status.PASS, "Assertion successful. Contact count returned to " + expectedCount);
         } catch (Exception e) {
             Hooks._Scenario.log(Status.FAIL, "Failed to verify the final contact count: " + e.getMessage());
             throw e;

@@ -16,3 +16,5 @@ Feature: Create Contact
     And the user enters "qatester@gmail.com" as the email
     And the user clicks the create button
     Then the user should be on the "View qa" page
+    When the user adds the "Test Lead" tag back to the contact "qatester@gmail.com"
+    Then the user should be on the "Edit qa" page

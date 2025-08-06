@@ -1,4 +1,4 @@
-Feature: Segment Management
+Feature: Create Segment
 
   Background: User is logged in
     Given the user is on the login page
@@ -12,7 +12,7 @@ Feature: Segment Management
     Given the user navigates to the segments page
     When the user creates a new segment named "Test Segment"
     Then the user should be redirected to the edit page for "Test Segment"
-    When the user adds a new rule named "main rule" with the following condition:
+    When the user adds a new rule named "main rule" with the following conditions:
       | condition type   | attribute | operator | value    |
       | Base Attribute   | birthday  | month is | February |
     Then the user should see the new rule condition on the page

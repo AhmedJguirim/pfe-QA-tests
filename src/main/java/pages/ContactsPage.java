@@ -58,6 +58,7 @@ public class ContactsPage {
     }
 
     public int getContactsTotal() {
+        scrollDown();
         WebElement paginationElement = wait.until(ExpectedConditions.visibilityOfElementLocated(paginationOverview));
         String text = paginationElement.getText();
         Pattern pattern = Pattern.compile("(\\d+)(?!.*\\d)");
@@ -72,7 +73,8 @@ public class ContactsPage {
         wait.until(ExpectedConditions.elementToBeClickable(importContactsButton)).click();
     }
 
-    public void uploadContactsFile(String filePath) {
+    public void uploadContactsFile(String filePath) throws InterruptedException {
+        Thread.sleep(2000);
         WebElement uploadElement = wait.until(ExpectedConditions.presenceOfElementLocated(fileUploadInput));
         uploadElement.sendKeys(filePath);
     }
