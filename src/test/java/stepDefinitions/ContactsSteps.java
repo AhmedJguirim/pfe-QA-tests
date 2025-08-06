@@ -94,6 +94,8 @@ public class ContactsSteps extends TestBase {
 
     @When("the user deletes the following contacts:")
     public void the_user_deletes_the_following_contacts(DataTable dataTable) throws InterruptedException {
+        try{
+        contactsPage.navigateToContacts();
         List<String> emails = dataTable.asList(String.class);
         initialContactCount = contactsPage.getContactsTotal();
         // We skip the header row of the data table which is 'email'
@@ -101,16 +103,23 @@ public class ContactsSteps extends TestBase {
             String email = emails.get(i);
             try {
                 Hooks._Scenario.log(Status.INFO, "Deleting contact: " + email);
+                Thread.sleep(2000);
                 contactsPage.searchForContact(email);
+                Thread.sleep(1000);
                 contactsPage.clickDeleteButtonForVisibleContact();
+                Thread.sleep(1000);
                 contactsPage.clickConfirmDeleteButton();
                 // Wait for the UI to refresh after deletion
-                Thread.sleep(1000); 
                 Hooks._Scenario.log(Status.PASS, "Successfully deleted contact: " + email);
             } catch (Exception e) {
                 Hooks._Scenario.log(Status.FAIL, "Failed to delete contact " + email + ": " + e.getMessage());
                 throw e;
             }
+        }
+        Hooks._Scenario.log(Status.PASS, "Contacts cleaned up successfully.");
+        } catch (Exception e) {
+            Hooks._Scenario.log(Status.FAIL, "Failed to clean up contacts: " + e.getMessage());
+            throw e;
         }
     }
 

@@ -57,12 +57,19 @@ public class SegmentAutomationSteps extends TestBase {
         
         try {
             customItemPage.navigateToCustomItems();
+            Thread.sleep(1000);
             customItemPage.clickNewCustomItemButton();
+            Thread.sleep(1000);
             customItemPage.selectCustomObject(data.get("custom object"));
+            Thread.sleep(1000);
             customItemPage.selectContact(email);
+            Thread.sleep(1000);
             customItemPage.enterIdentifier(data.get("identifier"));
+            Thread.sleep(1000);
             customItemPage.enterDate(data.get("reservation day"));
+            Thread.sleep(1000);
             customItemPage.selectRoomType(data.get("room type"));
+            Thread.sleep(1000);
             customItemPage.clickCreateButton();
             Hooks._Scenario.log(Status.PASS, "Successfully created a new custom item.");
             Thread.sleep(1000);

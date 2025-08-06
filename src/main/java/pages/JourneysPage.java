@@ -56,6 +56,7 @@ private final By submitSettingsButton = By.xpath("//button[@type='submit' and ./
     private final By segmentsSelectContainer = By.xpath("//select[contains(@id, 'segments')]/parent::div");
     private final By segmentsSelectInput = By.xpath("//div[@data-field-wrapper][.//span[normalize-space()='Select Segments']]//input[contains(@class, 'choices__input--cloned')]");
 
+    private final By deleteJourneyButton = By.cssSelector("button[wire\\:click^=\"mountTableAction('delete'\"]");
     
     public JourneysPage(WebDriver driver) {
         this.driver = driver;
@@ -346,5 +347,15 @@ private final By submitSettingsButton = By.xpath("//button[@type='submit' and ./
     public void scrollModalToBottom() {
         WebElement modalScroller = wait.until(ExpectedConditions.visibilityOfElementLocated(modalScrollableArea));
         js.executeScript("arguments[0].scrollTop = arguments[0].scrollHeight", modalScroller);
+    }
+
+    public void deleteJourney(String journeyName) throws InterruptedException {
+        navigateToJourneys();
+        searchJourney(journeyName);
+        Thread.sleep(1000);
+        wait.until(ExpectedConditions.elementToBeClickable(deleteJourneyButton)).click();
+        Thread.sleep(1000);
+        wait.until(ExpectedConditions.elementToBeClickable(confirmButton)).click();
+        Thread.sleep(1000);
     }
 }

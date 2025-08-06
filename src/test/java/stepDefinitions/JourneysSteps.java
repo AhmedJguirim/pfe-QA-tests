@@ -38,10 +38,18 @@ public class JourneysSteps extends TestBase {
     public void the_user_activates_the_journey(String journeyName) throws InterruptedException {
         try {
             journeysPage.navigateToJourneys();
+            Thread.sleep(1000);
+
             journeysPage.searchJourney(journeyName);
+            Thread.sleep(1000);
+
             journeysPage.clickViewLink();
+            Thread.sleep(1000);
+
             assertTrue(journeysPage.isJourneyPageVisible(journeyName), "Not on the correct journey page.");
             journeysPage.clickActivateButton();
+            Thread.sleep(1000);
+
             journeysPage.clickConfirmButton();
             Hooks._Scenario.log(Status.PASS, "Successfully activated the journey: " + journeyName);
         } catch (Exception e) {
@@ -51,10 +59,11 @@ public class JourneysSteps extends TestBase {
     }
 
     @When("the user creates a new contact with the following details:")
-    public void the_user_creates_a_new_contact_with_the_following_details(DataTable dataTable) {
+    public void the_user_creates_a_new_contact_with_the_following_details(DataTable dataTable) throws InterruptedException {
         try {
             Map<String, String> contactDetails = dataTable.asMaps().get(0);
             contactsPage.navigateToContacts();
+            Thread.sleep(20000);
             contactsPage.clickNewContactButton();
             contactsPage.enterFirstName(contactDetails.get("firstName"));
             contactsPage.enterLastName(contactDetails.get("lastName"));
@@ -71,7 +80,7 @@ public class JourneysSteps extends TestBase {
     @Then("the user should see the tags {string}, {string}, and {string} for the contact {string}")
     public void the_user_should_see_the_tags_for_the_contact(String tag1, String tag2, String tag3, String email) throws InterruptedException {
         try {
-            Thread.sleep(40000); // Wait for journeys to run
+            Thread.sleep(120000); // Wait for journeys to run
             getDriver().navigate().refresh();
             // contactsPage.navigateToContacts();
             // contactsPage.searchForContact(email);

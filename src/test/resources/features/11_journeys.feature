@@ -17,6 +17,3 @@ Feature: Journeys Automation
       | firstName | lastName | email                  |
       | Test      | User     | journey.test@gmail.com |
     Then the user should see the tags "qatag1", "qatag2", and "qatag3" for the contact "journey.test@gmail.com"
-    When the user deactivates the "QA1" journey
-    And the user deactivates the "QA2" journey
-    And the user deactivates the "QA3" journey

@@ -36,7 +36,7 @@ public class ManageSegmentSteps extends TestBase {
     }
 
     @When("the user clicks on the rules link for the segment")
-    public void the_user_clicks_on_the_rules_link_for_the_segment() {
+    public void the_user_clicks_on_the_rules_link_for_the_segment()  throws InterruptedException {
         try {
             segmentsPage.clickRulesLink();
             Hooks._Scenario.log(Status.PASS, "Clicked on the 'Rules' link.");

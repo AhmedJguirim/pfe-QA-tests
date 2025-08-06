@@ -60,6 +60,7 @@ public class CustomItemPage {
         wait.until(ExpectedConditions.elementToBeClickable(contactSelectDiv)).click();
         Thread.sleep(1000);
         WebElement searchInput = wait.until(ExpectedConditions.visibilityOfElementLocated(contactSearchInput));
+        Thread.sleep(1000);
         searchInput.sendKeys(email);
         Thread.sleep(1000); // Wait for search results
         searchInput.sendKeys(Keys.ENTER);

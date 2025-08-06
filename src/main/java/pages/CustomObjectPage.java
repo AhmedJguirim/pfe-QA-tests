@@ -33,6 +33,11 @@ public class CustomObjectPage {
     private final By addOptionButton = By.cssSelector("button[wire\\:click=\"mountFormComponentAction('mountedTableActionsData.0.params.options', 'add')\"]");
     private final By paginationOverview = By.cssSelector("span.fi-pagination-overview");
 
+    // private final By deleteObjectButton = By.cssSelector("button[wire\\:click^=\"mountAction('delete')\"]");
+    private final By confirmDeleteObjectButton = By.xpath("//button[.//span[normalize-space()='Confirm']]");
+    private final By searchInput = By.cssSelector("input[wire\\:model\\.live\\.debounce\\.500ms='tableSearch']");
+    private final By deleteButton = By.xpath("//button[.//span[normalize-space()='Delete']]");
+
     public CustomObjectPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -135,5 +140,18 @@ public class CustomObjectPage {
 
     public void scrollDown() {
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+    }
+
+    public void deleteCustomObject(String objectName) throws InterruptedException {
+        navigateToCustomObjects();
+        WebElement searchField = wait.until(ExpectedConditions.elementToBeClickable(searchInput));
+        searchField.clear();
+        searchField.sendKeys(objectName);
+        Thread.sleep(1000);
+        // This is a more specific locator for the delete button in the table row
+        Thread.sleep(1000);
+        wait.until(ExpectedConditions.elementToBeClickable(deleteButton)).click();
+        Thread.sleep(1000);
+        wait.until(ExpectedConditions.elementToBeClickable(confirmDeleteObjectButton)).click();
     }
 }

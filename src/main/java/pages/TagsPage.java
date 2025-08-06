@@ -8,15 +8,18 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TagsPage {
-private WebDriver driver;
-private WebDriverWait wait;
+    private WebDriver driver;
+    private WebDriverWait wait;
 
-private final By tagsSidebarLink = By.xpath("//span[normalize-space()='Tags']");
-private final By newTagButton = By.cssSelector("a[href='http://127.0.0.1:8000/admin/tags/create']");
-private final By tagNameInput = By.id("data.name");
-private final By createButton = By.xpath("//button[.//span[normalize-space()='Create']]");
-private final By searchInput = By.cssSelector("input[wire\\:model\\.live\\.debounce\\.500ms='tableSearch']");
-private final By searchResult = By.className("fi-pagination-overview");
+    private final By tagsSidebarLink = By.xpath("//span[normalize-space()='Tags']");
+    private final By newTagButton = By.cssSelector("a[href='http://127.0.0.1:8000/admin/tags/create']");
+    private final By tagNameInput = By.id("data.name");
+    private final By createButton = By.xpath("//button[.//span[normalize-space()='Create']]");
+    private final By searchInput = By.cssSelector("input[wire\\:model\\.live\\.debounce\\.500ms='tableSearch']");
+    private final By searchResult = By.className("fi-pagination-overview");
+
+    private final By deleteTagButton = By.cssSelector("button[wire\\:click^=\"mountTableAction('delete'\"]");
+    private final By confirmDeleteTagButton = By.xpath("//button[.//span[normalize-space()='Confirm']]");
 
     public TagsPage(WebDriver driver) {
         this.driver = driver;
@@ -49,5 +52,15 @@ private final By searchResult = By.className("fi-pagination-overview");
 
     public String getSearchResult() {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(searchResult)).getText();
+    }
+
+    public void deleteTag(String tagName) throws InterruptedException {
+
+        searchForTag(tagName);
+        Thread.sleep(1000);
+        wait.until(ExpectedConditions.elementToBeClickable(deleteTagButton)).click();
+        Thread.sleep(1000);
+        wait.until(ExpectedConditions.elementToBeClickable(confirmDeleteTagButton)).click();
+        Thread.sleep(1000);
     }
 }

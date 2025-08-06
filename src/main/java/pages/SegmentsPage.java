@@ -61,6 +61,9 @@ public class SegmentsPage {
     private final By emptySegmentMessage = By.xpath("//h4[normalize-space()='No contacts']");
     private final By paginationOverview = By.cssSelector("span.fi-pagination-overview");
 
+    private final By deleteSegmentButton = By.cssSelector("button[wire\\:click^=\"mountTableAction('delete'\"]");
+    private final By confirmDeleteSegmentButton = By.xpath("//button[.//span[normalize-space()='Confirm']]");
+
 
     public SegmentsPage(WebDriver driver) {
         this.driver = driver;
@@ -170,7 +173,8 @@ public class SegmentsPage {
         Thread.sleep(700); // Wait for livewire debounce
     }
 
-    public void clickRulesLink() {
+    public void clickRulesLink() throws InterruptedException {
+        Thread.sleep(2000);
         wait.until(ExpectedConditions.elementToBeClickable(rulesLink)).click();
     }
 
@@ -240,5 +244,13 @@ public class SegmentsPage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(paginationOverview)).getText();
     }
 
-
+    public void deleteSegment(String segmentName) throws InterruptedException {
+        navigateToSegments();
+        searchSegment(segmentName);
+        Thread.sleep(1000);
+        wait.until(ExpectedConditions.elementToBeClickable(deleteSegmentButton)).click();
+        Thread.sleep(1000);
+        wait.until(ExpectedConditions.elementToBeClickable(confirmDeleteSegmentButton)).click();
+        Thread.sleep(1000);
+    }
 }

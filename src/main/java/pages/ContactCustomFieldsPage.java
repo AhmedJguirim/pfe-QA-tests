@@ -21,7 +21,9 @@ public class ContactCustomFieldsPage {
     private final By fieldTypeSelect = By.cssSelector("select[id='mountedActionsData.0.field_type']");
     private final By createButton = By.xpath("//button[@type='submit' and .//span[normalize-space()='Create']]");
 
-    
+    private final By deleteButton = By.cssSelector("button[wire\\:click^=\"mountTableAction('delete'\"]");
+    private final By confirmDeleteButton = By.xpath("//button[.//span[normalize-space()='Confirm']]");
+    private final By searchInput = By.cssSelector("input[wire\\:model\\.live\\.debounce\\.500ms='tableSearch']");
 
     public ContactCustomFieldsPage(WebDriver driver) {
         this.driver = driver;
@@ -64,5 +66,16 @@ public class ContactCustomFieldsPage {
      */
     public void clickCreateButton() {
         wait.until(ExpectedConditions.elementToBeClickable(createButton)).click();
+    }
+
+    public void deleteCustomField(String fieldName) throws InterruptedException {
+        navigateToContactCustomFields();
+        WebElement searchField = wait.until(ExpectedConditions.elementToBeClickable(searchInput));
+        searchField.clear();
+        searchField.sendKeys(fieldName);
+        Thread.sleep(1000);
+        wait.until(ExpectedConditions.elementToBeClickable(deleteButton)).click();
+        Thread.sleep(1000);
+        wait.until(ExpectedConditions.elementToBeClickable(confirmDeleteButton)).click();
     }
 }
