@@ -183,7 +183,7 @@ public class SegmentAutomationSteps extends TestBase {
         }
     }
 
-    // ADD
+    
     @When("the user adds the {string} tag back to the contact {string}")
     public void the_user_adds_the_tag_back_to_the_contact(String tagName, String email) throws InterruptedException {
         try {

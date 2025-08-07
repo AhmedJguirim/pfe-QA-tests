@@ -75,14 +75,4 @@ public class CreateContactSteps extends TestBase {
         }
     }
     
-    // @Then("the user should be on the {string} page")
-    // public void the_user_should_be_on_the_page(String pageTitle) {
-    //     try {
-    //         assertTrue(contactsPage.isOnPage(pageTitle), "User was not on the expected page: " + pageTitle);
-    //         Hooks._Scenario.log(Status.PASS, "Successfully verified user is on the '" + pageTitle + "' page.");
-    //     } catch (Exception e) {
-    //         Hooks._Scenario.log(Status.FAIL, "Failed to verify page redirection: " + e.getMessage());
-    //         throw e;
-    //     }
-    // }
 }

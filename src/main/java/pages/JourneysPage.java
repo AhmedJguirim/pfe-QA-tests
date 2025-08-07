@@ -1,4 +1,4 @@
-// ADD
+
 package pages;
 
 import java.time.Duration;
@@ -24,7 +24,7 @@ public class JourneysPage {
     private final By confirmButton = By.xpath("//button[.//span[normalize-space()='Confirm']]");
     private final By deactivateButton = By.cssSelector("button[wire\\:click=\"mountAction('deactivate')\"]");
 
-    // ADD
+    
     private final By newJourneyButton = By.xpath("//a[contains(@href, '/admin/journeys/create')]");
     private final By journeyNameInput = By.id("data.name");
     private final By createJourneyButton = By.xpath("//button[.//span[normalize-space()='Create']]");
@@ -63,7 +63,7 @@ private final By submitSettingsButton = By.xpath("//button[@type='submit' and ./
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
-    // ADD
+    
     public void createJourney(String journeyName) throws InterruptedException {
         navigateToJourneys();
         clickNewJourneyButton();
@@ -72,7 +72,7 @@ private final By submitSettingsButton = By.xpath("//button[@type='submit' and ./
         clickEditJourneyButton();
     }
     
-    // ADD
+    
     public void addTagNodeToJourney(String tagName) throws InterruptedException {
         Thread.sleep(5000); // Wait for editor to load
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(addConnectionButton)).get(0).click();
@@ -93,14 +93,14 @@ private final By submitSettingsButton = By.xpath("//button[@type='submit' and ./
         wait.until(ExpectedConditions.elementToBeClickable(submitActionModalButton)).click();
     }
     
-    // ADD
+    
     public void configureContactAddedTrigger() throws InterruptedException {
         clickSettingsButton();
         selectTrigger("When a Contact Gets Added");
         clickSubmitSettingsButton();
     }
 
-    // ADD
+    
     public void configureTagAddedTrigger(String triggerTagName) throws InterruptedException {
         clickSettingsButton();
         selectTrigger("When a Tag Gets Added to a Contact");
@@ -133,7 +133,7 @@ private final By submitSettingsButton = By.xpath("//button[@type='submit' and ./
         clickSubmitSettingsButton();
     }
     
-    // ADD
+    
     public void publishAndDeactivateJourney() throws InterruptedException {
         clickPublishButton();
         Thread.sleep(1000);
@@ -141,9 +141,10 @@ private final By submitSettingsButton = By.xpath("//button[@type='submit' and ./
         // clickConfirmButton();
     }
     
-    // ADD
+    
     public boolean isJourneyInList(String journeyName) throws InterruptedException {
         searchJourney(journeyName);
+        Thread.sleep(1000);
         return wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//td[normalize-space()='" + journeyName + "']"))).isDisplayed();
     }
 
@@ -228,27 +229,27 @@ private final By submitSettingsButton = By.xpath("//button[@type='submit' and ./
         wait.until(ExpectedConditions.elementToBeClickable(deactivateButton)).click();
     }
 
-    // ADD
+    
     public void clickNewJourneyButton() {
         wait.until(ExpectedConditions.elementToBeClickable(newJourneyButton)).click();
     }
 
-    // ADD
+    
     public void enterJourneyName(String name) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(journeyNameInput)).sendKeys(name);
     }
 
-    // ADD
+    
     public void clickCreateJourneyButton() {
         wait.until(ExpectedConditions.elementToBeClickable(createJourneyButton)).click();
     }
 
-    // ADD
+    
     public void clickEditJourneyButton() {
         wait.until(ExpectedConditions.elementToBeClickable(editJourneyButton)).click();
     }
 
-    // ADD
+    
     public void configureJourneyNodes() throws InterruptedException {
         Thread.sleep(5000);
         for (int i = 0; i < 3; i++) {
@@ -296,7 +297,7 @@ private final By submitSettingsButton = By.xpath("//button[@type='submit' and ./
         wait.until(ExpectedConditions.elementToBeClickable(submitActionModalButton)).click();
     }
 
-    // ADD
+    
     public boolean isUpdateContactNodeVisible() throws InterruptedException {
         Thread.sleep(3000);
         for (int i = 0; i < 3; i++) {
@@ -306,18 +307,18 @@ private final By submitSettingsButton = By.xpath("//button[@type='submit' and ./
         return wait.until(ExpectedConditions.visibilityOfElementLocated(updateContactNode)).isDisplayed();
     }
 
-    // ADD
+    
     public boolean isAddTagNodeVisible() {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(addTagNode)).isDisplayed();
     }
 
-    // ADD
+    
     public void clickSettingsButton() throws InterruptedException {
         wait.until(ExpectedConditions.elementToBeClickable(settingsButton)).click();
         Thread.sleep(1000);
     }
 
-    // ADD
+    
     public void selectTrigger(String triggerType) {
         Select select = new Select(wait.until(ExpectedConditions.visibilityOfElementLocated(triggerSelect)));
         select.selectByVisibleText(triggerType);
@@ -325,25 +326,25 @@ private final By submitSettingsButton = By.xpath("//button[@type='submit' and ./
         
     }
 
-    // ADD
+    
     public void clickSubmitSettingsButton() {
 
         wait.until(ExpectedConditions.elementToBeClickable(submitSettingsButton)).click();
     }
 
-    // ADD
+    
     public void clickPublishButton() {
         wait.until(ExpectedConditions.elementToBeClickable(publishButton)).click();
     }
     
-    // ADD
+    
     public void deactivateAndConfirm() throws InterruptedException {
         Thread.sleep(10000);
         driver.navigate().refresh();
         clickDeactivateButton();
         clickConfirmButton();
     }
-        // ADD
+        
     public void scrollModalToBottom() {
         WebElement modalScroller = wait.until(ExpectedConditions.visibilityOfElementLocated(modalScrollableArea));
         js.executeScript("arguments[0].scrollTop = arguments[0].scrollHeight", modalScroller);
