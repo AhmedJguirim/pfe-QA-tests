@@ -2,12 +2,9 @@ package stepDefinitions;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.Test;
-
 import com.aventstack.extentreports.Status;
 
 import base.TestBase;
-import dev.failsafe.internal.util.Assert;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -79,12 +76,19 @@ public class LoginStep extends TestBase {
     @Then("the user should be redirected to the admin page")
     public void userShouldBeRedirectedToAdminPage() {
         try {
-            boolean isSuccess = loginPage.checkSuccessUrl();
-            assertTrue(isSuccess, "User was not redirected to the admin page.");
-            Hooks._Scenario.log(Status.PASS, "User successfully redirected to the admin page.");
+            // This line will throw a TimeoutException if the heading is not found.
+            loginPage.waitForDashboardHeading();
+            
+            // If the above line completes without error, the test has passed.
+            Hooks._Scenario.log(Status.PASS, "User successfully redirected and Dashboard heading is visible.");
+            
         } catch (Exception e) {
-            Hooks._Scenario.log(Status.FAIL, "Failed to verify successful login: " + e.getMessage());
-            throw e;
+            // This block will execute if the element was not found or another error occurred.
+            String errorMessage = "User was not redirected to the admin page. Dashboard heading not found.";
+            Hooks._Scenario.log(Status.FAIL, errorMessage + " Details: " + e.getMessage());
+            
+            // Re-throw the exception to ensure the test runner marks the scenario as failed.
+            throw new AssertionError(errorMessage, e);
         }
     }
 

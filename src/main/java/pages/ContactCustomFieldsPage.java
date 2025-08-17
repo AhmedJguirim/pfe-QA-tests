@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ContactCustomFieldsPage {
 
-    private WebDriver driver;
+    // private WebDriver driver;
     private WebDriverWait wait;
 
     // Locators based on the HTML you provided
@@ -26,7 +26,7 @@ public class ContactCustomFieldsPage {
     private final By searchInput = By.cssSelector("input[wire\\:model\\.live\\.debounce\\.500ms='tableSearch']");
 
     public ContactCustomFieldsPage(WebDriver driver) {
-        this.driver = driver;
+        // this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 

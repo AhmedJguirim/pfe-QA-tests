@@ -73,14 +73,12 @@ public class ContactsSteps extends TestBase {
     @Then("the total number of contacts should be increased by {int}")
     public void the_total_number_of_contacts_should_be_increased_by(Integer increaseAmount) throws InterruptedException {
         try {
-            Hooks._Scenario.log(Status.INFO, "Waiting for the contacts list to refresh...");
             Thread.sleep(3000); 
 
             contactsPage.navigateToContacts(); 
             
             Thread.sleep(1000);
             int newContactCount = contactsPage.getContactsTotal();
-            Hooks._Scenario.log(Status.INFO, "New number of contacts is: " + newContactCount);
 
             int expectedCount = initialContactCount + increaseAmount;
             assertEquals(expectedCount, newContactCount, "The contact count did not increase as expected.");
@@ -102,7 +100,6 @@ public class ContactsSteps extends TestBase {
         for (int i = 1; i < emails.size(); i++) {
             String email = emails.get(i);
             try {
-                Hooks._Scenario.log(Status.INFO, "Deleting contact: " + email);
                 Thread.sleep(2000);
                 contactsPage.searchForContact(email);
                 Thread.sleep(1000);

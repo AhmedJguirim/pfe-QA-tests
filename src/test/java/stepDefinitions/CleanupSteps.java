@@ -7,7 +7,7 @@ import base.TestBase;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.When;
 import pages.ContactCustomFieldsPage;
-import pages.ContactsPage;
+// import pages.ContactsPage;
 import pages.CustomObjectPage;
 import pages.JourneysPage;
 import pages.SegmentsPage;
@@ -19,7 +19,7 @@ public class CleanupSteps extends TestBase {
     private SegmentsPage segmentsPage;
     private CustomObjectPage customObjectPage;
     private ContactCustomFieldsPage contactCustomFieldsPage;
-    private ContactsPage contactsPage;
+    // private ContactsPage contactsPage;
     private TagsPage tagsPage;
 
     public CleanupSteps() {
@@ -28,7 +28,7 @@ public class CleanupSteps extends TestBase {
         this.segmentsPage = new SegmentsPage(getDriver());
         this.customObjectPage = new CustomObjectPage(getDriver());
         this.contactCustomFieldsPage = new ContactCustomFieldsPage(getDriver());
-        this.contactsPage = new ContactsPage(getDriver());
+        // this.contactsPage = new ContactsPage(getDriver());
         this.tagsPage = new TagsPage(getDriver());
     }
 

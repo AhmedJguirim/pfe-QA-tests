@@ -2,7 +2,6 @@ package pages;
 
 import java.time.Duration;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -15,7 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SegmentsPage {
 
-    private WebDriver driver;
+    // private WebDriver driver;
     private WebDriverWait wait;
     private JavascriptExecutor js;
 
@@ -42,7 +41,7 @@ public class SegmentsPage {
     private final By publishSegmentButton = By.cssSelector("button[wire\\:click=\"mountAction('publish')\"]");
 
     private final By searchInput = By.cssSelector("input[wire\\:model\\.live\\.debounce\\.500ms='tableSearch']");
-    private final By rulesLink = By.xpath("//a[.//span[normalize-space()='Rules']]");
+    private final By rulesLink = By.xpath("//a[.//span[normalize-space()='Edit']]");
     private final By renameButton = By.cssSelector("button[wire\\:click=\"mountAction('renameSegment')\"]");
     private final By renameInput = By.id("mountedActionsData.0.name");
     private final By renameSubmitButton = By.xpath("//button[@type='submit' and .//span[normalize-space()='Submit']]");
@@ -66,7 +65,7 @@ public class SegmentsPage {
 
 
     public SegmentsPage(WebDriver driver) {
-        this.driver = driver;
+        // this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         this.js = (JavascriptExecutor) driver;
     }
@@ -157,8 +156,11 @@ public class SegmentsPage {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(createdRuleConditionText)).isDisplayed();
     }
 
-    public void clickPublishSegmentButton() {
+    public void clickPublishSegmentButton() throws InterruptedException {
+        Thread.sleep(700);
         wait.until(ExpectedConditions.elementToBeClickable(publishSegmentButton)).click();
+        Thread.sleep(2000);
+
     }
 
     public boolean isOnViewSegmentPage(String pageTitle) {
@@ -216,8 +218,10 @@ public class SegmentsPage {
         WebElement dateInput = wait.until(ExpectedConditions.visibilityOfElementLocated(numberValueInput));
         dateInput.sendKeys(number);
     }
-    public void clickSaveChangesButton() {
+    public void clickSaveChangesButton() throws InterruptedException {
+        Thread.sleep(1000);
         wait.until(ExpectedConditions.elementToBeClickable(saveChangesButton)).click();
+        Thread.sleep(3000);
     }
 
         public int getConditionCardCount() {

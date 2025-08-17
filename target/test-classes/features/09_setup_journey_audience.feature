@@ -7,7 +7,7 @@ Feature: Setup Journey audience
     Then the user should be redirected to the admin page
 
   @SetupJourneyAudience
-  Scenario: Successfully manage an existing segment
+  Scenario: Successfully setup the test audience segments
     Given the user navigates to the segments page
     When the user searches for the segment "Winter tourist 2025"
     And the user clicks on the rules link for the segment

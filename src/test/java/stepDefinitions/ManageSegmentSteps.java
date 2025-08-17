@@ -1,7 +1,6 @@
 package stepDefinitions;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import java.util.Map;
@@ -132,8 +131,8 @@ public void the_user_adds_a_new_rule_named_with_the_following_conditions(String 
     }
 }
 
-    @And("the user saves the changes")
-    public void the_user_saves_the_changes() {
+    @When("the user saves the changes")
+    public void the_user_saves_the_changes() throws InterruptedException {
         try {
             segmentsPage.clickSaveChangesButton();
             Hooks._Scenario.log(Status.PASS, "Clicked the 'Save Changes' button.");

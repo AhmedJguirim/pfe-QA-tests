@@ -8,7 +8,7 @@ Feature: Automatic Segmentation
     Then the user should be redirected to the admin page
 
   @VerifySegmentAutomation
-  Scenario: Verify automatic segmentation after updating a custom item
+  Scenario: Verify automatic segmentation
     Given the user navigates to the segments page
     When the user searches for the segment "Winter tourist 2025"
     And the user clicks on the view link for the segment

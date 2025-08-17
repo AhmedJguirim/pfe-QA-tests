@@ -105,7 +105,11 @@ public class CustomObjectPage {
                 Thread.currentThread().interrupt();
             }
         }
-
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
         // Find all inputs for options based on the `wire:model` attribute
         List<WebElement> allOptionInputs = driver.findElements(By.cssSelector("input[wire\\:model^='mountedTableActionsData.0.params.options.']"));
 

@@ -12,12 +12,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CustomItemPage {
 
-    private WebDriver driver;
+    // private WebDriver driver;
     private WebDriverWait wait;
 
     // Locators
     private final By customItemsSidebarLink = By.xpath("//span[normalize-space()='Custom Items']");
-    private final By newCustomItemButton = By.cssSelector("a[href='http://127.0.0.1:8000/admin/custom-items/create']");
+    private final By newCustomItemButton = By.cssSelector("a[href='http://localhost:8000/admin/custom-items/create']");
     private final By customObjectSelect = By.id("data.custom_object_id");
     private final By contactSelectDiv = By.cssSelector("div.choices__inner");
     private final By contactSearchInput = By.cssSelector("input.choices__input--cloned");
@@ -33,13 +33,13 @@ public class CustomItemPage {
     private final By editLink = By.xpath("//a[.//span[normalize-space()='Edit']]");
     private final By saveChangesButton = By.xpath("//button[.//span[normalize-space()='Save changes']]");
 
-     // ADD
+     
     private final By deleteButton = By.cssSelector("button[wire\\:click^=\"mountTableAction('delete'\"]");
-    // ADD
+    
     private final By confirmDeleteButton = By.xpath("//button[.//span[normalize-space()='Confirm']]");
 
     public CustomItemPage(WebDriver driver) {
-        this.driver = driver;
+        // this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
 
@@ -112,16 +112,18 @@ public class CustomItemPage {
     }
 
     
-    public void clickSaveChangesButton() {
+    public void clickSaveChangesButton() throws InterruptedException {
+        Thread.sleep(1000);
         wait.until(ExpectedConditions.elementToBeClickable(saveChangesButton)).click();
+        Thread.sleep(3000);
     }
 
-    // ADD
+    
     public void clickDeleteButton() {
         wait.until(ExpectedConditions.elementToBeClickable(deleteButton)).click();
     }
 
-    // ADD
+    
     public void clickConfirmDeleteButton() {
         wait.until(ExpectedConditions.elementToBeClickable(confirmDeleteButton)).click();
     }

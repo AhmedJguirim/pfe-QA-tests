@@ -38,12 +38,15 @@ public class CustomObjectSteps extends TestBase {
     public void the_user_creates_a_new_custom_object_named(String objectName) throws InterruptedException {
         try {
             customObjectPage.clickCreateCustomObject();
+            Thread.sleep(1000);
             Hooks._Scenario.log(Status.PASS, "Clicked the 'Create Custom Object' button.");
             customObjectPage.enterCustomObjectName(objectName);
+            Thread.sleep(1000);
             Hooks._Scenario.log(Status.PASS, "Entered custom object name: " + objectName);
             customObjectPage.clickCreate();
+            Thread.sleep(1000);
             Hooks._Scenario.log(Status.PASS, "Clicked the 'Create' button.");
-            Thread.sleep(1000); // Wait for page to load
+            Thread.sleep(2000); // Wait for page to load
         } catch (Exception e) {
             Hooks._Scenario.log(Status.FAIL, "Failed to create custom object: " + e.getMessage());
             throw e;
@@ -60,10 +63,15 @@ public class CustomObjectSteps extends TestBase {
             String options = row.get("options");
 
             try {
+                Thread.sleep(1000);
                 customObjectPage.clickAddCustomField();
+                Thread.sleep(1000);
                 Hooks._Scenario.log(Status.PASS, "Clicked 'Add Custom Field' for field: " + name);
+                Thread.sleep(1000);
                 customObjectPage.enterFieldName(name);
+                Thread.sleep(1000);
                 customObjectPage.selectFieldType(type);
+                Thread.sleep(1000);
                 if (isUnique) {
                     customObjectPage.setUnique();
                 }

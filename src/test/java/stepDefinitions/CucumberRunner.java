@@ -7,8 +7,9 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "src/test/resources/features", glue = "stepDefinitions", 
-    // tags = "not @Cleanup",
-    tags = "@Cleanup",
+    // tags = "@CreateCustomObject",
+    tags = "not @Cleanup",
+    // tags = "@Cleanup",
     plugin = { "pretty",
                     "html:target/cucumber-reports"
 })

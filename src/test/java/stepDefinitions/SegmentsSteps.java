@@ -113,7 +113,7 @@ public void the_user_adds_a_new_rule_named_with_the_following_condition(String r
     }
 
     @When("the user publishes the segment")
-    public void the_user_publishes_the_segment() {
+    public void the_user_publishes_the_segment() throws InterruptedException {
         try {
             segmentsPage.clickPublishSegmentButton();
             Hooks._Scenario.log(Status.PASS, "Clicked the 'Publish Segment' button.");

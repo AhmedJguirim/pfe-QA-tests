@@ -19,7 +19,7 @@ public class LoginPage {
 
     public void openLoginPage() {
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        driver.get("http://127.0.0.1:8000/");
+        driver.get("http://localhost:8000/");
     }
 
     public void enterUsername(String username) {
@@ -38,9 +38,12 @@ public class LoginPage {
         btn.click();
     }
 
-    public boolean checkSuccessUrl() {
-        // Wait until the URL contains '/admin'
-        return wait.until(ExpectedConditions.urlContains("/admin"));
+    public WebElement waitForDashboardHeading() {
+        // Define the locator for the h1 element containing the text "Dashboard"
+        By dashboardHeadingLocator = By.xpath("//h1[normalize-space()='Dashboard']");
+        
+        // Wait until the element is visible on the page and return it
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardHeadingLocator));
     }
 
     public String getErrorMessage() {

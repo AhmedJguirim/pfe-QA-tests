@@ -13,7 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ContactsPage {
 
-    private WebDriver driver;
+    // private WebDriver driver;
     private WebDriverWait wait;
     private JavascriptExecutor js;
 
@@ -32,13 +32,15 @@ public class ContactsPage {
     // This finds the confirmation button in the modal, assuming its text is 'Confirm'
     private final By confirmDeleteButton = By.xpath("//button/span[normalize-space()='Confirm']");
 
-    private final By newContactButton = By.cssSelector("a[href='http://127.0.0.1:8000/admin/contacts/create']");
+    private final By newContactButton = By.cssSelector("a[href='http://localhost:8000/admin/contacts/create']");
     private final By firstNameInput = By.id("data.first_name");
     private final By lastNameInput = By.id("data.last_name");
     private final By emailInput = By.id("data.email");
     private final By createButton = By.xpath("//button[@type='submit' and .//span[normalize-space()='Create']]");
 
     private final By editContactButton = By.xpath("//a[contains(@href, '/edit')]");
+
+    
     private final By removeTagButton(String tagName) {
         return By.xpath("//div[contains(@class, 'choices__item') and text()='" + tagName + "']/button");
     }
@@ -48,7 +50,7 @@ public class ContactsPage {
 
 
     public ContactsPage(WebDriver driver) {
-        this.driver = driver;
+        // this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         this.js = (JavascriptExecutor) driver;
     }
@@ -155,9 +157,11 @@ public class ContactsPage {
         wait.until(ExpectedConditions.elementToBeClickable(removeTagButton(tagName))).click();
     }
 
-    public void clickSaveChangesButton() {
+    public void clickSaveChangesButton() throws InterruptedException {
         scrollDown();
+        Thread.sleep(1000);
         wait.until(ExpectedConditions.elementToBeClickable(saveChangesButton)).click();
+        Thread.sleep(3000);
     }
 
     public void addTag(String tagName) throws InterruptedException {

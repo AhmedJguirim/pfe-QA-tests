@@ -1,4 +1,3 @@
-# ADD
 Feature: Create Contact Custom Field
 
   Background: User is logged in

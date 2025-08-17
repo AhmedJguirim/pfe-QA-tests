@@ -108,12 +108,17 @@ public class SegmentAutomationSteps extends TestBase {
     public void the_user_updates_the_custom_item_for_with_a_new_date(String email, String newDate) throws InterruptedException {
         try {
             customItemPage.navigateToCustomItems();
+            Thread.sleep(1000);
             customItemPage.clickFilterButton();
+            Thread.sleep(1000);
             customItemPage.filterByCustomObject("Booking test");
+            Thread.sleep(1000);
             customItemPage.closeFilterMenu();
             Thread.sleep(1000);
             customItemPage.clickEditLink();
+            Thread.sleep(1000);
             customItemPage.updateDate(newDate);
+            Thread.sleep(1000);
             customItemPage.clickSaveChangesButton();
             Hooks._Scenario.log(Status.PASS, "Successfully updated the custom item.");
             Thread.sleep(5000);
@@ -140,10 +145,13 @@ public class SegmentAutomationSteps extends TestBase {
     public void the_user_removes_the_tag_from_the_contact(String tagName, String email) throws InterruptedException {
         try {
             contactsPage.navigateToContacts();
-            contactsPage.searchForContact(email);
             Thread.sleep(1000);
+            contactsPage.searchForContact(email);
+            Thread.sleep(3000);
             contactsPage.clickEditContactButton();
+            Thread.sleep(1000);
             contactsPage.removeTag(tagName);
+            Thread.sleep(1000);
             contactsPage.clickSaveChangesButton();
             Hooks._Scenario.log(Status.PASS, "Successfully removed the tag '" + tagName + "' from the contact.");
         } catch (Exception e) {
@@ -169,11 +177,15 @@ public class SegmentAutomationSteps extends TestBase {
     public void the_user_deletes_the_custom_item_for(String email) throws InterruptedException {
         try {
             customItemPage.navigateToCustomItems();
+            Thread.sleep(1000);
             customItemPage.clickFilterButton();
+            Thread.sleep(1000);
             customItemPage.filterByCustomObject("Booking test");
+            Thread.sleep(1000);
             customItemPage.closeFilterMenu();
             Thread.sleep(1000);
             customItemPage.clickDeleteButton();
+            Thread.sleep(1000);
             customItemPage.clickConfirmDeleteButton();
             Thread.sleep(1000);
             Hooks._Scenario.log(Status.PASS, "Successfully deleted the custom item for: " + email);
@@ -188,10 +200,13 @@ public class SegmentAutomationSteps extends TestBase {
     public void the_user_adds_the_tag_back_to_the_contact(String tagName, String email) throws InterruptedException {
         try {
             contactsPage.navigateToContacts();
+            Thread.sleep(2000);
             contactsPage.searchForContact(email);
-            Thread.sleep(1000);
+            Thread.sleep(2000);
             contactsPage.clickEditContactButton();
+            Thread.sleep(1000);
             contactsPage.addTag(tagName);
+            Thread.sleep(1000);
             contactsPage.clickSaveChangesButton();
             Hooks._Scenario.log(Status.PASS, "Successfully added the tag '" + tagName + "' back to the contact.");
         } catch (Exception e) {

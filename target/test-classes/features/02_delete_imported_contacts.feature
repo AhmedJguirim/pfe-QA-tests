@@ -1,4 +1,4 @@
-Feature: Delete imported contacts
+Feature: Delete contacts
 
   As a user i want to delete contacts
 

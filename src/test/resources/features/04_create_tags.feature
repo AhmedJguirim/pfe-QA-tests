@@ -9,10 +9,9 @@ Feature: Tag Management
   @Tags
   Scenario Outline: Successfully create new tags
     Given the user navigates to the tags page
-    When the user creates a new tag named "<tagName>"
-    Then the user should be on the "View <tagName>" page
-    Examples:
-      | tagName  |
-      | qatag1   |
-      | qatag2   |
-      | qatag3   |
+    When the user creates the following tags:
+      | tagName |
+      | qatag1  |
+      | qatag2  |
+      | qatag3  |
+    Then the user should be on the "View qatag3" page
