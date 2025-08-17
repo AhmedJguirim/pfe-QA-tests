@@ -106,7 +106,7 @@ public class CustomObjectPage {
             }
         }
         try {
-            Thread.sleep(2000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
@@ -151,9 +151,8 @@ public class CustomObjectPage {
         WebElement searchField = wait.until(ExpectedConditions.elementToBeClickable(searchInput));
         searchField.clear();
         searchField.sendKeys(objectName);
-        Thread.sleep(1000);
         // This is a more specific locator for the delete button in the table row
-        Thread.sleep(1000);
+        Thread.sleep(5000);
         wait.until(ExpectedConditions.elementToBeClickable(deleteButton)).click();
         Thread.sleep(1000);
         wait.until(ExpectedConditions.elementToBeClickable(confirmDeleteObjectButton)).click();

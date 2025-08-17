@@ -31,13 +31,14 @@ public class TagsSteps extends TestBase {
     }
 
     @When("the user creates a new tag named {string}")
-    public void the_user_creates_a_new_tag_named(String tagName) {
+    public void the_user_creates_a_new_tag_named(String tagName) throws InterruptedException{
         try {
             tagsPage.clickNewTagButton();
             Hooks._Scenario.log(Status.PASS, "Clicked on the 'New Tag' button.");
             tagsPage.enterTagName(tagName);
             Hooks._Scenario.log(Status.PASS, "Entered tag name: " + tagName);
             tagsPage.clickCreateButton();
+            Thread.sleep(4000);
             Hooks._Scenario.log(Status.PASS, "Clicked on the 'Create' button.");
         } catch (Exception e) {
             Hooks._Scenario.log(Status.FAIL, "Failed to create new tag: " + e.getMessage());
@@ -57,10 +58,13 @@ public class TagsSteps extends TestBase {
                 Thread.sleep(1000);
                 tagsPage.clickNewTagButton();
                 Hooks._Scenario.log(Status.PASS, "Clicked on the 'New Tag' button.");
+                Thread.sleep(1000);
                 tagsPage.enterTagName(tagName);
                 Hooks._Scenario.log(Status.PASS, "Entered tag name: " + tagName);
+                Thread.sleep(2000);
                 tagsPage.clickCreateButton();
                 Hooks._Scenario.log(Status.PASS, "Clicked on the 'Create' button.");
+                Thread.sleep(4000);
             } catch (Exception e) {
                 Hooks._Scenario.log(Status.FAIL, "Failed to create new tag: " + e.getMessage());
                 throw e;

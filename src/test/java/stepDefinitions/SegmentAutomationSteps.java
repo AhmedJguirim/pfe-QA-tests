@@ -72,7 +72,7 @@ public class SegmentAutomationSteps extends TestBase {
             Thread.sleep(1000);
             customItemPage.clickCreateButton();
             Hooks._Scenario.log(Status.PASS, "Successfully created a new custom item.");
-            Thread.sleep(1000);
+            customItemPage.viewPageHeaderVisible();
         } catch (Exception e) {
             Hooks._Scenario.log(Status.FAIL, "Failed to create the custom item: " + e.getMessage());
             throw e;
@@ -82,9 +82,10 @@ public class SegmentAutomationSteps extends TestBase {
     @When("the user navigates back to the {string} segment page")
     public void the_user_navigates_back_to_the_segment_page(String segmentName) throws InterruptedException {
         try {
+            Thread.sleep(2000);
             segmentsPage.navigateToSegments();
+            Thread.sleep(4000);
             segmentsPage.searchSegment(segmentName);
-            Thread.sleep(1000);
             segmentsPage.clickViewLink();
             Hooks._Scenario.log(Status.PASS, "Navigated back to the segment page: " + segmentName);
         } catch (Exception e) {
@@ -185,9 +186,9 @@ public class SegmentAutomationSteps extends TestBase {
             customItemPage.closeFilterMenu();
             Thread.sleep(1000);
             customItemPage.clickDeleteButton();
-            Thread.sleep(1000);
+            Thread.sleep(2000);
             customItemPage.clickConfirmDeleteButton();
-            Thread.sleep(1000);
+            Thread.sleep(4000);
             Hooks._Scenario.log(Status.PASS, "Successfully deleted the custom item for: " + email);
         } catch (Exception e) {
             Hooks._Scenario.log(Status.FAIL, "Failed to delete the custom item: " + e.getMessage());
@@ -208,6 +209,7 @@ public class SegmentAutomationSteps extends TestBase {
             contactsPage.addTag(tagName);
             Thread.sleep(1000);
             contactsPage.clickSaveChangesButton();
+            Thread.sleep(4000);
             Hooks._Scenario.log(Status.PASS, "Successfully added the tag '" + tagName + "' back to the contact.");
         } catch (Exception e) {
             Hooks._Scenario.log(Status.FAIL, "Failed to add the tag back to the contact: " + e.getMessage());

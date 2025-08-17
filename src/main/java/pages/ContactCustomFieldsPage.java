@@ -73,7 +73,7 @@ public class ContactCustomFieldsPage {
         WebElement searchField = wait.until(ExpectedConditions.elementToBeClickable(searchInput));
         searchField.clear();
         searchField.sendKeys(fieldName);
-        Thread.sleep(1000);
+        Thread.sleep(5000);
         wait.until(ExpectedConditions.elementToBeClickable(deleteButton)).click();
         Thread.sleep(1000);
         wait.until(ExpectedConditions.elementToBeClickable(confirmDeleteButton)).click();

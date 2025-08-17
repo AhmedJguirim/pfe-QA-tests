@@ -10,11 +10,11 @@ Feature: Create Segment
   @CreateSegment
   Scenario: Successfully create a new segment with a rule
     Given the user navigates to the segments page
-    When the user creates a new segment named "Test Segment"
-    Then the user should be redirected to the edit page for "Test Segment"
-    When the user adds a new rule named "main rule" with the following conditions:
-      | condition type   | attribute | operator | value    |
-      | Base Attribute   | birthday  | month is | February |
-    Then the user should see the new rule condition on the page
-    When the user publishes the segment
-    Then the user should be on the "View Test Segment" page
+    When the user creates a new segment named "Winter tourist 2025"
+    Then the user should be redirected to the edit page for "Winter tourist 2025"
+    When the user adds a new rule named "main" with the following conditions:
+      | condition type | attribute                      | operator        | value        |
+      | Custom Item    | Booking test - Reservation day | is after        | 11-18-2025   |
+      | Tags           |                                | has any of      | New lead     |
+    And the user publishes the segment
+    Then the user should be on the "View Winter tourist 2025" page

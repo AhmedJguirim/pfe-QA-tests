@@ -55,7 +55,7 @@ public class ContactsPage {
         this.js = (JavascriptExecutor) driver;
     }
     
-    public void navigateToContacts() {
+    public void navigateToContacts(){
         wait.until(ExpectedConditions.elementToBeClickable(contactsSidebarLink)).click();
     }
 
@@ -103,7 +103,7 @@ public class ContactsPage {
         searchField.clear();
         searchField.sendKeys(email);
         // Wait for the livewire debounce (500ms) + a buffer to update results
-        Thread.sleep(700); 
+        Thread.sleep(5000); 
     }
 
     /**
@@ -167,9 +167,9 @@ public class ContactsPage {
     public void addTag(String tagName) throws InterruptedException {
         WebElement tagInputField = wait.until(ExpectedConditions.elementToBeClickable(tagInput));
         tagInputField.click();
-        Thread.sleep(1000);
+        Thread.sleep(3000);
         tagInputField.sendKeys(tagName);
-        Thread.sleep(1000);
+        Thread.sleep(3000);
         tagInputField.sendKeys(Keys.ENTER);
     }
 

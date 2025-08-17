@@ -64,6 +64,8 @@ public class ContactsSteps extends TestBase {
             contactsPage.clickFinalImportButton();
             Hooks._Scenario.log(Status.PASS, "Clicked the final 'Import' button to start the process.");
 
+            Thread.sleep(5000);
+
         } catch (Exception e) {
             Hooks._Scenario.log(Status.FAIL, "Failed during the import process: " + e.getMessage());
             throw e;
@@ -104,10 +106,11 @@ public class ContactsSteps extends TestBase {
                 contactsPage.searchForContact(email);
                 Thread.sleep(1000);
                 contactsPage.clickDeleteButtonForVisibleContact();
-                Thread.sleep(1000);
+                Thread.sleep(2000);
                 contactsPage.clickConfirmDeleteButton();
                 // Wait for the UI to refresh after deletion
                 Hooks._Scenario.log(Status.PASS, "Successfully deleted contact: " + email);
+                Thread.sleep(2000);
             } catch (Exception e) {
                 Hooks._Scenario.log(Status.FAIL, "Failed to delete contact " + email + ": " + e.getMessage());
                 throw e;

@@ -171,8 +171,9 @@ public class SegmentsPage {
     public void searchSegment(String segmentName) throws InterruptedException {
         WebElement searchField = wait.until(ExpectedConditions.elementToBeClickable(searchInput));
         searchField.clear();
+         Thread.sleep(2000);
         searchField.sendKeys(segmentName);
-        Thread.sleep(700); // Wait for livewire debounce
+        Thread.sleep(5000); // Wait for search results
     }
 
     public void clickRulesLink() throws InterruptedException {
@@ -194,9 +195,12 @@ public class SegmentsPage {
         wait.until(ExpectedConditions.elementToBeClickable(renameSubmitButton)).click();
     }
 
-    public void deleteRule() {
+    public void deleteRule()  throws InterruptedException{
+        Thread.sleep(1000);
         wait.until(ExpectedConditions.elementToBeClickable(deleteRuleButton)).click();
+        Thread.sleep(2000);
         wait.until(ExpectedConditions.elementToBeClickable(confirmDeleteButton)).click();
+        Thread.sleep(4000);
     }
 
     public void selectTagOperator(String operator) {
@@ -204,9 +208,11 @@ public class SegmentsPage {
         select.selectByVisibleText(operator);
     }
 
-    public void enterTagValue(String tag) {
+    public void enterTagValue(String tag)  throws InterruptedException {
         WebElement tagInput = wait.until(ExpectedConditions.elementToBeClickable(tagValueInput));
+        Thread.sleep(3000);
         tagInput.sendKeys(tag);
+        Thread.sleep(3000);
         tagInput.sendKeys(Keys.ENTER);
     }
 

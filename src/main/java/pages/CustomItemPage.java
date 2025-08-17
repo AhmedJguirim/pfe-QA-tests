@@ -51,6 +51,8 @@ public class CustomItemPage {
         wait.until(ExpectedConditions.elementToBeClickable(newCustomItemButton)).click();
     }
 
+
+
     public void selectCustomObject(String objectName) {
         Select select = new Select(wait.until(ExpectedConditions.visibilityOfElementLocated(customObjectSelect)));
         select.selectByVisibleText(objectName);
@@ -60,9 +62,9 @@ public class CustomItemPage {
         wait.until(ExpectedConditions.elementToBeClickable(contactSelectDiv)).click();
         Thread.sleep(1000);
         WebElement searchInput = wait.until(ExpectedConditions.visibilityOfElementLocated(contactSearchInput));
-        Thread.sleep(1000);
+        Thread.sleep(3000);
         searchInput.sendKeys(email);
-        Thread.sleep(1000); // Wait for search results
+        Thread.sleep(5000); // Wait for search results
         searchInput.sendKeys(Keys.ENTER);
     }
 
@@ -126,5 +128,11 @@ public class CustomItemPage {
     
     public void clickConfirmDeleteButton() {
         wait.until(ExpectedConditions.elementToBeClickable(confirmDeleteButton)).click();
+    }
+
+    public void viewPageHeaderVisible(){
+        String pageTitle = "View custom item";
+        By pageHeader = By.xpath("//h1[normalize-space()='" + pageTitle + "']");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(pageHeader));
     }
 }

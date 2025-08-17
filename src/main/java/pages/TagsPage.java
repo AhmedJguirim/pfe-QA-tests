@@ -47,7 +47,7 @@ public class TagsPage {
         WebElement searchField = wait.until(ExpectedConditions.elementToBeClickable(searchInput));
         searchField.clear();
         searchField.sendKeys(tagName);
-        Thread.sleep(1000);
+        Thread.sleep(5000); // Wait for search results
     }
 
     public String getSearchResult() {

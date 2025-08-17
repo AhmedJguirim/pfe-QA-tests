@@ -66,9 +66,13 @@ private final By submitSettingsButton = By.xpath("//button[@type='submit' and ./
     
     public void createJourney(String journeyName) throws InterruptedException {
         navigateToJourneys();
+        Thread.sleep(2000);
         clickNewJourneyButton();
+        Thread.sleep(2000);
         enterJourneyName(journeyName);
+        Thread.sleep(2000);
         clickCreateJourneyButton();
+        Thread.sleep(2000);
         clickEditJourneyButton();
     }
     
@@ -84,20 +88,25 @@ private final By submitSettingsButton = By.xpath("//button[@type='submit' and ./
 
         WebElement tagInput = wait.until(ExpectedConditions.visibilityOfElementLocated(tagInputField));
         tagInput.click();
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         tagInput.sendKeys(tagName);
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         tagInput.sendKeys(Keys.ENTER);
         Thread.sleep(1000);
         wait.until(ExpectedConditions.elementToBeClickable(editAddTagNodeHeader)).click();
+        Thread.sleep(2000);
         wait.until(ExpectedConditions.elementToBeClickable(submitActionModalButton)).click();
+        Thread.sleep(6000);
     }
     
     
     public void configureContactAddedTrigger() throws InterruptedException {
         clickSettingsButton();
+        Thread.sleep(2000);
         selectTrigger("When a Contact Gets Added");
+        Thread.sleep(2000);
         clickSubmitSettingsButton();
+        Thread.sleep(2000);
     }
 
     
@@ -106,9 +115,11 @@ private final By submitSettingsButton = By.xpath("//button[@type='submit' and ./
         selectTrigger("When a Tag Gets Added to a Contact");
         Thread.sleep(1000);
         Select triggerTag = new Select(wait.until(ExpectedConditions.visibilityOfElementLocated(triggerTagSelect)));
+        Thread.sleep(2000);
         triggerTag.selectByVisibleText(triggerTagName);
         scrollModalToBottom();
         clickSubmitSettingsButton();
+        Thread.sleep(2000);
     }
 
     
@@ -127,17 +138,19 @@ private final By submitSettingsButton = By.xpath("//button[@type='submit' and ./
         WebElement segmentInput = wait.until(ExpectedConditions.visibilityOfElementLocated(segmentsSelectInput));
         Thread.sleep(5000);
         segmentInput.sendKeys(segmentName);
-        Thread.sleep(1000);
+        Thread.sleep(3000);
         segmentInput.sendKeys(Keys.ENTER);
         Thread.sleep(1000);
         clickSubmitSettingsButton();
+        Thread.sleep(4000);
     }
     
     
     public void publishAndDeactivateJourney() throws InterruptedException {
         clickPublishButton();
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         deactivateAndConfirm();
+        Thread.sleep(2000);
         // clickConfirmButton();
     }
     
@@ -157,43 +170,51 @@ private final By submitSettingsButton = By.xpath("//button[@type='submit' and ./
         }
 
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(addConnectionButton)).get(0).click();
+        Thread.sleep(2000);
         wait.until(ExpectedConditions.elementToBeClickable(updateContactCard)).click();
+        Thread.sleep(2000);
         wait.until(ExpectedConditions.elementToBeClickable(submitNodeButton)).click();
 
         Thread.sleep(3000);
         wait.until(ExpectedConditions.elementToBeClickable(contactFieldSelect)).click();
-        Thread.sleep(1000);
+        Thread.sleep(3000);
         WebElement contactField = wait.until(ExpectedConditions.visibilityOfElementLocated(contactFieldInput));
         contactField.sendKeys("Test Number of Visits");
-        Thread.sleep(1000);
+        Thread.sleep(3000);
         contactField.sendKeys(Keys.ENTER);
-
+        Thread.sleep(2000);
         wait.until(ExpectedConditions.visibilityOfElementLocated(valueInput)).sendKeys("3");
+        Thread.sleep(2000);
         wait.until(ExpectedConditions.elementToBeClickable(submitActionModalButton)).click();
 
-        Thread.sleep(3000);
+        Thread.sleep(6000);
 
         for (int i = 0; i < 3; i++) {
             wait.until(ExpectedConditions.elementToBeClickable(zoomOutButton)).click();
             Thread.sleep(500);
         }
 
+        Thread.sleep(2000);
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(addConnectionButton)).get(1).click();
+        Thread.sleep(2000);
         wait.until(ExpectedConditions.elementToBeClickable(addTagCard)).click();
+        Thread.sleep(2000);
         wait.until(ExpectedConditions.elementToBeClickable(submitNodeButton)).click();
         
         Thread.sleep(2000);
 
         WebElement tagInput = wait.until(ExpectedConditions.visibilityOfElementLocated(tagInputField));
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         tagInput.sendKeys("qatag1");
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         tagInput.sendKeys(Keys.ENTER);
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
         wait.until(ExpectedConditions.elementToBeClickable(editAddTagNodeHeader)).click();
+        Thread.sleep(3000);
 
         wait.until(ExpectedConditions.elementToBeClickable(submitActionModalButton)).click();
+        Thread.sleep(6000);
     }
 
     public void navigateToJourneys() {
@@ -205,7 +226,7 @@ private final By submitSettingsButton = By.xpath("//button[@type='submit' and ./
         WebElement searchField = wait.until(ExpectedConditions.elementToBeClickable(searchInput));
         searchField.clear();
         searchField.sendKeys(journeyName);
-        Thread.sleep(700); // Wait for livewire debounce
+        Thread.sleep(5000); // Wait for search results
     }
 
     public void clickViewLink() {
@@ -263,16 +284,16 @@ private final By submitSettingsButton = By.xpath("//button[@type='submit' and ./
 
         Thread.sleep(3000);
         wait.until(ExpectedConditions.elementToBeClickable(contactFieldSelect)).click();
-        Thread.sleep(1000);
+        Thread.sleep(3000);
         WebElement contactField = wait.until(ExpectedConditions.visibilityOfElementLocated(contactFieldInput));
         contactField.sendKeys("Test Number of Visits");
-        Thread.sleep(1000);
+        Thread.sleep(3000);
         contactField.sendKeys(Keys.ENTER);
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(valueInput)).sendKeys("3");
         wait.until(ExpectedConditions.elementToBeClickable(submitActionModalButton)).click();
 
-        Thread.sleep(3000);
+        Thread.sleep(6000);
 
         for (int i = 0; i < 3; i++) {
             wait.until(ExpectedConditions.elementToBeClickable(zoomOutButton)).click();
@@ -286,15 +307,17 @@ private final By submitSettingsButton = By.xpath("//button[@type='submit' and ./
         Thread.sleep(2000);
 
         WebElement tagInput = wait.until(ExpectedConditions.visibilityOfElementLocated(tagInputField));
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         tagInput.sendKeys("qatag1");
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         tagInput.sendKeys(Keys.ENTER);
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
         wait.until(ExpectedConditions.elementToBeClickable(editAddTagNodeHeader)).click();
+        Thread.sleep(3000);
 
         wait.until(ExpectedConditions.elementToBeClickable(submitActionModalButton)).click();
+        Thread.sleep(6000);
     }
 
     

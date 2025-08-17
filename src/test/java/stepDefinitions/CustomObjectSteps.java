@@ -82,7 +82,7 @@ public class CustomObjectSteps extends TestBase {
                 customObjectPage.scrollDown();
                 customObjectPage.clickCreateField();
                 Hooks._Scenario.log(Status.PASS, "Clicked 'Create' for field: " + name);
-                Thread.sleep(1000); // Wait for page to load
+                Thread.sleep(5000); // Wait for page to load
             } catch (Exception e) {
                 Hooks._Scenario.log(Status.FAIL, "Failed to add custom field " + name + ": " + e.getMessage());
                 throw e;

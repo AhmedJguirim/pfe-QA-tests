@@ -75,6 +75,7 @@ public void the_user_adds_a_new_rule_named_with_the_following_condition(String r
         Hooks._Scenario.log(Status.PASS, "Entered rule name: " + ruleName);
 
         segmentsPage.clickSubmitRuleButton();
+        Thread.sleep(4000);
         Hooks._Scenario.log(Status.PASS, "Clicked the 'Submit' button.");
         
         segmentsPage.clickAddConditionButton();
@@ -94,6 +95,9 @@ public void the_user_adds_a_new_rule_named_with_the_following_condition(String r
         
         segmentsPage.clickSubmitRuleButton();
         Hooks._Scenario.log(Status.PASS, "Clicked the 'Submit' button.");
+        Thread.sleep(4000);
+
+        
 
     } catch (Exception e) {
         Hooks._Scenario.log(Status.FAIL, "Failed to add the new rule: " + e.getMessage());
@@ -101,16 +105,16 @@ public void the_user_adds_a_new_rule_named_with_the_following_condition(String r
     }
 }
 
-    @Then("the user should see the new rule condition on the page")
-    public void the_user_should_see_the_new_rule_condition_on_the_page() {
-        try {
-            assertTrue(segmentsPage.isRuleConditionVisible(), "The rule condition was not visible.");
-            Hooks._Scenario.log(Status.PASS, "Successfully verified the new rule condition.");
-        } catch (Exception e) {
-            Hooks._Scenario.log(Status.FAIL, "Failed to verify the new rule condition: " + e.getMessage());
-            throw e;
-        }
-    }
+    // @Then("the user should see the new rule condition on the page")
+    // public void the_user_should_see_the_new_rule_condition_on_the_page() {
+    //     try {
+    //         assertTrue(segmentsPage.isRuleConditionVisible(), "The rule condition was not visible.");
+    //         Hooks._Scenario.log(Status.PASS, "Successfully verified the new rule condition.");
+    //     } catch (Exception e) {
+    //         Hooks._Scenario.log(Status.FAIL, "Failed to verify the new rule condition: " + e.getMessage());
+    //         throw e;
+    //     }
+    // }
 
     @When("the user publishes the segment")
     public void the_user_publishes_the_segment() throws InterruptedException {

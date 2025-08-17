@@ -21,10 +21,14 @@ public class CreateJourneySteps extends TestBase {
     public void the_user_creates_the_first_journey_named(String journeyName) throws InterruptedException {
         try {
             journeysPage.createJourney(journeyName);
+            Thread.sleep(2000);
             journeysPage.configureComplexJourneyNodes();
+            Thread.sleep(2000);
             journeysPage.configureContactAddedTrigger();
+            Thread.sleep(2000);
             journeysPage.publishAndDeactivateJourney();
             Hooks._Scenario.log(Status.PASS, "Successfully created journey: " + journeyName);
+            Thread.sleep(2000);
         } catch (Exception e) {
             Hooks._Scenario.log(Status.FAIL, "Failed to create journey " + journeyName + ": " + e.getMessage());
             throw e;
@@ -36,10 +40,14 @@ public class CreateJourneySteps extends TestBase {
     public void the_user_creates_the_second_journey_named_triggered_by_the_tag(String journeyName, String triggerTag) throws InterruptedException {
         try {
             journeysPage.createJourney(journeyName);
+            Thread.sleep(2000);
             journeysPage.addTagNodeToJourney("qatag2");
+            Thread.sleep(2000);
             journeysPage.configureTagAddedTrigger(triggerTag);
+            Thread.sleep(2000);
             journeysPage.publishAndDeactivateJourney();
             Hooks._Scenario.log(Status.PASS, "Successfully created journey: " + journeyName);
+            Thread.sleep(2000);
         } catch (Exception e) {
             Hooks._Scenario.log(Status.FAIL, "Failed to create journey " + journeyName + ": " + e.getMessage());
             throw e;
@@ -51,10 +59,14 @@ public class CreateJourneySteps extends TestBase {
     public void the_user_creates_the_third_journey_named_triggered_by_the_tag_with_the_audience(String journeyName, String triggerTag, String segment) throws InterruptedException {
         try {
             journeysPage.createJourney(journeyName);
+            Thread.sleep(2000);
             journeysPage.addTagNodeToJourney("qatag3");
+            Thread.sleep(2000);
             journeysPage.configureTagAddedTriggerAndSegmentAudience(triggerTag,segment);
+            Thread.sleep(2000);
             journeysPage.publishAndDeactivateJourney();
             Hooks._Scenario.log(Status.PASS, "Successfully created journey: " + journeyName);
+            Thread.sleep(2000);
         } catch (Exception e) {
             Hooks._Scenario.log(Status.FAIL, "Failed to create journey " + journeyName + ": " + e.getMessage());
             throw e;

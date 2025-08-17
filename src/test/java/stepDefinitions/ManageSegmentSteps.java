@@ -46,13 +46,15 @@ public class ManageSegmentSteps extends TestBase {
     }
 
     @When("the user renames the segment to {string}")
-    public void the_user_renames_the_segment_to(String newName) {
+    public void the_user_renames_the_segment_to(String newName) throws InterruptedException {
         try {
             segmentsPage.clickRenameButton();
+            Thread.sleep(2000);
             Hooks._Scenario.log(Status.PASS, "Clicked the 'Rename' button.");
             segmentsPage.enterNewSegmentName(newName);
             Hooks._Scenario.log(Status.PASS, "Entered new segment name: " + newName);
             segmentsPage.clickRenameSubmitButton();
+            Thread.sleep(4000);
             Hooks._Scenario.log(Status.PASS, "Clicked the 'Submit' button to rename.");
         } catch (Exception e) {
             Hooks._Scenario.log(Status.FAIL, "Failed to rename the segment: " + e.getMessage());
@@ -61,7 +63,7 @@ public class ManageSegmentSteps extends TestBase {
     }
 
     @When("the user deletes the existing rule")
-    public void the_user_deletes_the_existing_rule() {
+    public void the_user_deletes_the_existing_rule() throws InterruptedException  {
         try {
             segmentsPage.deleteRule();
             Hooks._Scenario.log(Status.PASS, "Successfully deleted the existing rule.");
@@ -84,6 +86,8 @@ public void the_user_adds_a_new_rule_named_with_the_following_conditions(String 
         Thread.sleep(1000);
         segmentsPage.clickSubmitRuleButton();
         Hooks._Scenario.log(Status.PASS, "Clicked the 'Submit' button.");
+
+        Thread.sleep(3000);
         
         List<Map<String, String>> conditions = dataTable.asMaps(String.class, String.class);
         for (Map<String, String> condition : conditions) {
@@ -124,6 +128,7 @@ public void the_user_adds_a_new_rule_named_with_the_following_conditions(String 
             Thread.sleep(1000);
             segmentsPage.clickSubmitRuleButton();
             Hooks._Scenario.log(Status.PASS, "Clicked the 'Submit' button.");
+            Thread.sleep(4000);
         }
     } catch (Exception e) {
         Hooks._Scenario.log(Status.FAIL, "Failed to add the new rule with conditions: " + e.getMessage());
